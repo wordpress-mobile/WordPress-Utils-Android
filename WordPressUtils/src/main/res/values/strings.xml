@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="ptr_tip_message">Tip: Pull down to refresh</string>
+
+    <!-- General -->
+    <string name="ok">OK</string>
+
+    <!-- Pull to refresh  -->
+    <string name="pull_to_refresh_tip_message">Tip: Pull down to refresh</string>
     <string name="pull_to_refresh_pull_no_network_label">No network, can\'t refresh</string>
+
+    <!-- Network errors -->
     <string name="no_network_message">There is no network available</string>
+
+    <!-- SD card errors -->
+    <string name="sd_card_required_title">SD Card Required</string>
+    <string name="sd_card_required_message">A mounted SD card is required to upload media</string>
+
 </resources>
