@@ -278,4 +278,12 @@ public class StringUtils {
             return defaultValue;
         }
     }
+
+    public static String[] convertArrayToLowercase(String[] array) {
+        String[] lowerCaseArray = new String[array.length];
+        for (int i = 0; i < array.length; i++) {
+            lowerCaseArray[i] = array[i].toLowerCase();
+        }
+        return lowerCaseArray;
+    }
 }
