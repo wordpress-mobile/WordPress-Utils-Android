@@ -4,12 +4,12 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.1.2'
+        classpath 'com.novoda:bintray-release:0.3.4'
     }
 }
 
 apply plugin: 'com.android.library'
-apply plugin: 'maven'
-apply plugin: 'signing'
+apply plugin: 'com.novoda.bintray-release'
 
 repositories {
     jcenter()
@@ -32,23 +32,11 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        versionName "1.11.0"
+        versionName "1.12.0"
         minSdkVersion 14
         targetSdkVersion 23
     }
 }
-
-version android.defaultConfig.versionName
-group = "org.wordpress"
-archivesBaseName = "utils"
-
-signing {
-    required {
-        has("release") && project.properties.containsKey("signing.keyId") && project.properties.containsKey("signing.secretKeyRingFile")
-    }
-    sign configurations.archives
-}
-
 
 android.libraryVariants.all { variant ->
     task("generate${variant.name}Javadoc", type: Javadoc) {
@@ -61,4 +49,17 @@ android.libraryVariants.all { variant ->
         }
         exclude '**/R.java'
     }
+}
+
+publish {
+    artifactId = 'utils'
+    userOrg = 'wordpress-mobile'
+    groupId = 'org.wordpress'
+    uploadName = 'utils'
+    description = 'Utils library for Android'
+    publishVersion = android.defaultConfig.versionName
+    licences = ['MIT', 'GPL']
+    website = 'https://github.com/wordpress-mobile/WordPress-Utils-Android/'
+    dryRun = 'false'
+    autoPublish = 'true'
 }
