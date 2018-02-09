@@ -3,6 +3,7 @@ package org.wordpress.android.util;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.Outline;
 import android.os.Build;
@@ -75,4 +76,21 @@ public class ViewUtils {
             });
         }
     }
+
+
+    /**
+     *
+     * @return true if the default locale is RtL, false otherwise. On SDK < 17 always return false.
+     */
+    public static boolean isRtl(@NonNull Context context) {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            Configuration configuration = context.getResources().getConfiguration();
+            if (configuration.getLayoutDirection() == ViewCompat.LAYOUT_DIRECTION_RTL) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 }
