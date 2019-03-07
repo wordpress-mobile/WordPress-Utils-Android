@@ -12,8 +12,8 @@ jobs:
       - checkout
       - android/restore-gradle-cache
       - run:
-          name: Lint
-          command: ./gradlew --stacktrace lintRelease
+          name: Lint & Checkstyle
+          command: ./gradlew --stacktrace lint checkstyle
       - android/save-gradle-cache
       - android/save-lint-results
   Build:
@@ -25,7 +25,7 @@ jobs:
       - android/restore-gradle-cache
       - run:
           name: Build
-          command: ./gradlew --stacktrace assembleRelease
+          command: ./gradlew --stacktrace assembleDebug assembleRelease
       - android/save-gradle-cache
 
 workflows:
