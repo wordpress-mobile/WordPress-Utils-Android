@@ -13,14 +13,15 @@ public class DateTimeUtilsTest {
 
     @Test
     public void testIso8601UTCFromDate() {
+        // Arrange
         TimeZone.setDefault(TimeZone.getTimeZone("GMT+2:00"));
         Date date = new Date(mDefaultDate);
-
         String expected = "2019-07-30T10:54:18+00:00";
 
+        // Act
         String actual = DateTimeUtils.iso8601UTCFromDate(date);
 
-
+        // Assert
         assertThat(actual).isEqualTo(expected);
     }
 
