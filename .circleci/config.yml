@@ -58,7 +58,10 @@ jobs:
       - android/restore-gradle-cache
       - run:
           name: Experimental Bintray Upload
-          command: ./gradlew --stacktrace bintrayUpload
+          # It's redundant to rebuild the release here when it's already done
+          # in the Build job. The only reason it's done like that is to keep
+          # them separated while testing
+          command: ./gradlew --stacktrace assembleRelease bintrayUpload
       - android/save-gradle-cache
 
 workflows:
