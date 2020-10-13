@@ -87,6 +87,8 @@ android.libraryVariants.all { variant ->
     }
 }
 
+def bintrayVersion = android.defaultConfig.versionName
+
 bintray {
     user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
     key = project.hasProperty('bintrayKey') ? project.property('bintrayKey') : System.getenv('BINTRAY_KEY')
@@ -99,7 +101,7 @@ bintray {
         licenses = ['MIT', 'GPL']
         vcsUrl = 'https://github.com/wordpress-mobile/WordPress-Utils-Android.git'
         version {
-            name = android.defaultConfig.versionName
+            name = bintrayVersion
             desc = 'Utils library for Android'
             released  = new Date()
         }
@@ -113,7 +115,7 @@ project.afterEvaluate {
                 from components.release
                 groupId 'org.wordpress'
                 artifactId 'utils'
-                version android.defaultConfig.versionName
+                version bintrayVersion
             }
         }
     }
