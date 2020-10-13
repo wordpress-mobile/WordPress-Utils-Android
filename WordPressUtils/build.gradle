@@ -95,7 +95,9 @@ def getCheckedOutGitCommitHash() {
   return 'git rev-parse --verify --short HEAD'.execute().text.trim()
 }
 
-def bintrayVersion = "${getGitBranch()}-${getCheckedOutGitCommitHash()}"// android.defaultConfig.versionName
+def bintrayVersion() {
+  return "${getGitBranch()}-${getCheckedOutGitCommitHash()}"// android.defaultConfig.versionName
+}
 
 bintray {
     user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
