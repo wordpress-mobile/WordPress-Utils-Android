@@ -58,11 +58,7 @@ jobs:
       - android/restore-gradle-cache
       - run:
           name: Experimental Bintray Upload
-          # It's a bit wasteful to rebuild here, when we already have an
-          # artifact available from the Build set.  Given the build time is
-          # around 90s, we can live with it for the moment and come back
-          # later to add caching
-          command: ./gradlew --stacktrace assembleRelease bintrayUpload
+          command: ./gradlew --stacktrace bintrayUpload
       - android/save-gradle-cache
 
 workflows:
