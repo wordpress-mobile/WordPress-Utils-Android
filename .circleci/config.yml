@@ -59,7 +59,7 @@ jobs:
       # - android/restore-gradle-cache
       - run:
           name: Experimental Bintray Upload
-          command: ./gradlew --stacktrace bintrayUpload
+          command: ./gradlew --stacktrace assembleRelease bintrayUpload
       # - android/save-gradle-cache
 
 workflows:
