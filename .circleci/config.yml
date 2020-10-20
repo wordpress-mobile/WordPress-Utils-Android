@@ -88,7 +88,9 @@ workflows:
             branches:
               ignore: /.*/
             tags:
-              only: /^\d+(\.\d+)*$/
+              # only: /^\d+(\.\d+)*$/
+              # while testing, use any tag
+              only: /.*/
       - Upload to Bintray:
           requires:
             - Build
