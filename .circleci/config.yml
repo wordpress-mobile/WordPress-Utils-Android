@@ -55,12 +55,11 @@ jobs:
     steps:
       - checkout
       - copy-gradle-properties
-      # Trying without gradle cache to see if bintrayUpload works
-      # - android/restore-gradle-cache
+      - android/restore-gradle-cache
       - run:
           name: Experimental Bintray Upload
           command: ./gradlew --stacktrace assembleRelease bintrayUpload
-      # - android/save-gradle-cache
+      - android/save-gradle-cache
 
 workflows:
   # This shall not run on tags, but no filter statement is necessary because
