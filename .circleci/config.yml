@@ -79,12 +79,14 @@ workflows:
           filters:
             tags:
               ignore: /.*/
+  # This is meant to run only on tags. To do so, it's enough to have the filter
+  # requirement on the first job (?)
   Bintray Release Build:
     jobs:
-      - Build
-      - Upload to Bintray:
+      - Build:
           filters:
             branches:
               ignore: /.*/
             tags:
               only: /^\d+(\.\d+)*$/
+      - Upload to Bintray
