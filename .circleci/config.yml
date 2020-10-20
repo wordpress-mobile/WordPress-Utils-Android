@@ -48,7 +48,7 @@ jobs:
           name: Build
           command: ./gradlew --stacktrace assembleDebug assembleRelease
       - android/save-gradle-cache
-  Bintray Upload:
+  bintray-upload-from-branch:
     executor:
       name: android/default
       api-version: "27"
@@ -73,7 +73,7 @@ workflows:
       - Build:
           requires:
             - Test
-      - Bintray Upload:
+      - bintray-upload-from-branch:
           requires:
             - Build
           filters:
