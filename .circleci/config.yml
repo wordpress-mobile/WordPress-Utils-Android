@@ -58,9 +58,10 @@ jobs:
       - android/restore-gradle-cache
       - run:
           name: Experimental Bintray Upload
-          # It's redundant to rebuild the release here when it's already done
-          # in the Build job. The only reason it's done like that is to keep
-          # them separated while testing
+          # It's a bit wasteful to rebuild here, when we already have an
+          # artifact available from the Build set.  Given the build time is
+          # around 90s, we can live with it for the moment and come back
+          # later to add caching
           command: ./gradlew --stacktrace assembleRelease bintrayUpload
       - android/save-gradle-cache
 
@@ -72,4 +73,6 @@ workflows:
       - Build:
           requires:
             - Test
-      - Bintray Upload
+      - Bintray Upload:
+          requires:
+            - Build
