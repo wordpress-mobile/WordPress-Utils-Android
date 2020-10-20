@@ -58,7 +58,11 @@ jobs:
       - android/restore-gradle-cache
       - run:
           name: Experimental Bintray Upload
-          command: ./gradlew --stacktrace assembleRelease bintrayUpload
+          # I'm out of ideas, trying to executed the two commands one after the
+          # other to see if it makes any difference
+          command: |
+            ./gradlew --stacktrace assembleRelease
+            ./gradlew --stacktrace bintrayUpload
       - android/save-gradle-cache
 
 workflows:
