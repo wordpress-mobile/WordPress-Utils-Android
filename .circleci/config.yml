@@ -76,3 +76,7 @@ workflows:
       - Bintray Upload:
           requires:
             - Build
+          filters:
+            # Don't run on tags
+            tags:
+              ignore: /.*/
