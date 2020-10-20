@@ -76,3 +76,15 @@ workflows:
       - Upload to Bintray:
           requires:
             - Build
+          filters:
+            tags:
+              ignore: /.*/
+  Bintray Release Build:
+    jobs:
+      - Build
+      - Upload to Bintray:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^\d+(\.\d+)*$/
