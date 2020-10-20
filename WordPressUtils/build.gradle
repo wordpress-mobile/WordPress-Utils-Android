@@ -90,6 +90,17 @@ android.libraryVariants.all { variant ->
 def getGitBranch() {
   return 'git rev-parse --abbrev-ref HEAD'.execute().text.trim()
 }
+
+def getGitTag() {
+  def result = 'git describe --exact-match --tags HEAD'.execute().text.trim()
+
+  if (result.startsWith("fatal: no tag exactly matches")) {
+    return null
+  } else {
+    return result
+  }
+}
+
 def getCheckedOutGitCommitHash() {
   return 'git rev-parse --verify --short HEAD'.execute().text.trim()
 }
@@ -99,7 +110,13 @@ def getBintrayVersion() {
   // return "${getGitBranch()}-${getCheckedOutGitCommitHash()}"
 
   // A more CI friendly option might be to just use the sha
-  return getCheckedOutGitCommitHash()
+  def tag = getGitTag()
+
+  if (tag) {
+    return tag
+  } else {
+    return getCheckedOutGitCommitHash()
+  }
 }
 
 bintray {
