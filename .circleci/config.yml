@@ -66,14 +66,15 @@ workflows:
   # that's the default behavior
   WordPress-Utils-Android:
     jobs:
-      - Lint
-      - Test
-      - Build:
-          requires:
-            - Test
-      - Upload to Bintray:
-          requires:
-            - Build
+      # - Lint
+      # - Test
+      # - Build:
+      #     requires:
+      #       - Test
+      # - Upload to Bintray:
+      #     requires:
+      #       - Build
+      - Upload to Bintray
   # This is meant to run only on tags; we need to specify the filtering on
   # every job.
   Bintray Release Build:
