@@ -112,6 +112,12 @@ def getBintrayVersion() {
   // A more CI friendly option might be to just use the sha
   def tag = getGitTag()
 
+  // See https://circleci.com/docs/2.0/env-vars/
+  def pr = System.getenv('CIRCLE_PR_NUMBER')
+    if (pr) {
+      return "${pr}-${getCheckedOutGitCommitHash()}"
+    }
+
   if (tag) {
     return tag
   } else {
