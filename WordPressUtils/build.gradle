@@ -148,11 +148,15 @@ bintray {
     }
 }
 
+// Because the components are created only during the `afterEvaluate` phase, we
+// must configure our publications using the `afterEvaluate()` lifecycle method
 project.afterEvaluate {
     publishing {
         publications {
             UtilsPublication(MavenPublication) {
+                // Applies the component for the release build variant
                 from components.release
+
                 groupId 'org.wordpress'
                 artifactId 'utils'
                 version getBintrayVersion()
