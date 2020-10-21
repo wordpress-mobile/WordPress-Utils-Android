@@ -113,7 +113,7 @@ def getBintrayVersion() {
   def tag = getGitTag()
 
   // See https://circleci.com/docs/2.0/env-vars/
-  def pr = System.getenv('CIRCLE_PULL_REQUEST')
+  def pr = System.getenv('CIRCLE_PULL_REQUEST').split('/').last()
     if (pr) {
       return "${pr}-${getCheckedOutGitCommitHash()}"
     }
