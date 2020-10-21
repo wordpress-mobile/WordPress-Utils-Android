@@ -66,6 +66,11 @@ jobs:
           # other to see if it makes any difference
           command: |
             ./gradlew --stacktrace assembleRelease
+            # On local, the POM is generated automatically as part of
+            # assembleRelease, but that doesn't seem to be the case on CI. Here
+            # we need to explicitly generated it, otherwise bintrayUpload won't
+            # find it and won't upload it.
+            ./gradlew --stacktrace generatePomFileForUtilsPublicationPublication
             ./gradlew --stacktrace bintrayUpload
       - android/save-gradle-cache
 
