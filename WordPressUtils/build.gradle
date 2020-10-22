@@ -113,6 +113,10 @@ def getBintrayVersion() {
   // A more CI friendly option might be to just use the sha
   def tag = getGitTag()
 
+  // It's not ideal to access CI environment variables from here, since this
+  // code could be run locally as well. The reasons this is this way right now
+  // is because of the logic to extract the PR number.
+  //
   // See https://circleci.com/docs/2.0/env-vars/
   def prURL = System.getenv('CIRCLE_PULL_REQUEST')
   if (prURL) {
