@@ -62,14 +62,23 @@ jobs:
       - android/restore-gradle-cache
       - run:
           name: Experimental Bintray Upload
-          # I'm out of ideas, trying to executed the two commands one after the
-          # other to see if it makes any difference
           command: |
+            # Locally, calling `./gradlew bintrayUpload` is enough to generate
+            # all the required artifacts. On CI, unless run each task
+            # individually, the Bintray task will fail to find the .aar and
+            # pom.xml artifacts in the build/ folder.
             ./gradlew --stacktrace assembleRelease
             # On local, the POM is generated automatically as part of
             # assembleRelease, but that doesn't seem to be the case on CI. Here
             # we need to explicitly generated it, otherwise bintrayUpload won't
             # find it and won't upload it.
+            #
+            # Worth noting that the Bintray plugin mentions the necessity for
+            # a workaround to generate the POM. See:
+            # https://github.com/bintray/gradle-bintray-plugin#maven-publications
+            #
+            # See also the description and comments in this PR:
+            # https://github.com/wordpress-mobile/WordPress-Utils-Android/pull/39
             ./gradlew --stacktrace generatePomFileForUtilsPublicationPublication
             ./gradlew --stacktrace bintrayUpload
       - android/save-gradle-cache
