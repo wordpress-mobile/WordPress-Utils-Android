@@ -12,7 +12,7 @@ commands:
 
 jobs:
   Lint:
-    executor: 
+    executor:
       name: android/default
       api-version: "27"
     steps:
@@ -25,7 +25,7 @@ jobs:
       - android/save-gradle-cache
       - android/save-lint-results
   Build:
-    executor: 
+    executor:
       name: android/default
       api-version: "27"
     steps:
