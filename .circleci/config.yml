@@ -24,6 +24,18 @@ jobs:
           command: ./gradlew --stacktrace lint checkstyle
       - android/save-gradle-cache
       - android/save-lint-results
+  Test:
+    executor:
+      name: android/default
+      api-version: "27"
+    steps:
+      - checkout
+      - copy-gradle-properties
+      - android/restore-gradle-cache
+      - run:
+          name: Test
+          command: ./gradlew --stacktrace test
+      - android/save-gradle-cache
   Build:
     executor:
       name: android/default
@@ -41,4 +53,7 @@ workflows:
   WordPress-Utils-Android:
     jobs:
       - Lint
-      - Build
+      - Test
+      - Build:
+          requires:
+            - Test
