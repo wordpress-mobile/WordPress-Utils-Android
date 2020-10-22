@@ -36,19 +36,7 @@ jobs:
           name: Test
           command: ./gradlew --stacktrace test
       - android/save-gradle-cache
-  Build:
-    executor:
-      name: android/default
-      api-version: "27"
-    steps:
-      - checkout
-      - copy-gradle-properties
-      - android/restore-gradle-cache
-      - run:
-          name: Build
-          command: ./gradlew --stacktrace assembleDebug assembleRelease
-      - android/save-gradle-cache
-  Upload to Bintray:
+  Build and upload to Bintray:
     executor:
       name: android/default
       api-version: "27"
@@ -93,7 +81,7 @@ workflows:
       # - Build:
       #     requires:
       #       - Test
-      # - Upload to Bintray:
+      # - Build and upload to Bintray:
       #     requires:
       #       - Build
-      - Upload to Bintray
+      - Build and upload to Bintray
