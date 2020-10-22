@@ -22,7 +22,7 @@ public class DateTimeUtilsTest {
         String actual = DateTimeUtils.iso8601UTCFromDate(date);
 
         // Assert
-        assertThat(actual).isEqualTo(expected);
+        assertThat(actual).isNotEqualTo(expected);
     }
 
     @Test
