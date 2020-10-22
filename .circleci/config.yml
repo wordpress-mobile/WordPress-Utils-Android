@@ -84,8 +84,8 @@ jobs:
       - android/save-gradle-cache
 
 workflows:
-  # This shall not run on tags, but no filter statement is necessary because
-  # that's the default behavior
+  # We don't want this to run on tags, but no filter statement is necessary
+  # because that's the default behavior
   WordPress-Utils-Android:
     jobs:
       # - Lint
@@ -97,25 +97,3 @@ workflows:
       #     requires:
       #       - Build
       - Upload to Bintray
-  # This is meant to run only on tags; we need to specify the filtering on
-  # every job.
-  Bintray Release Build:
-    jobs:
-      - Build:
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              # only: /^\d+(\.\d+)*$/
-              # while testing, use any tag
-              only: /.*/
-      - Upload to Bintray:
-          requires:
-            - Build
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              # only: /^\d+(\.\d+)*$/
-              # while testing, use any tag
-              only: /.*/
