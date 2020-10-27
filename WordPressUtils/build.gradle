@@ -127,6 +127,17 @@ def getBintrayVersion() {
     }
   }
 
+  // Not on a PR. Are we on master|trunk?
+  if (getGitBranch() == 'master') {
+    // On master|trunk use the library version; these are production releases
+    return android.defaultConfig.versionName
+  }
+
+  // Are we on develop?
+  if (getGitBranch() == 'develop') {
+    // TODO: only return version if it's a "-beta.n" one
+  }
+
   if (tag) {
     return tag
   } else {
