@@ -39,3 +39,4 @@ Dual licensed under MIT, and GPL.
 [1]: https://github.com/wordpress-mobile/WordPress-Utils-Android/blob/a9fbe8e6597d44055ec2180dbf45aecbfc332a20/WordPressUtils/build.gradle#L37
 [2]: https://github.com/wordpress-mobile/WordPress-Android
 [3]: https://github.com/wordpress-mobile/WordPress-FluxC-Android
+
