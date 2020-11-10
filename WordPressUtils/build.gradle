@@ -107,7 +107,7 @@ def getCheckedOutGitCommitHash() {
 }
 
 def getBintrayVersion() {
-  project.properties['bintrayVersion'] ?: getBintrayVersion_()
+  return project.properties['bintrayVersion'] ?: getBintrayVersion_()
 }
 
 def getBintrayVersion_() {
