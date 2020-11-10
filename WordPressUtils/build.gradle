@@ -107,7 +107,7 @@ def getCheckedOutGitCommitHash() {
 }
 
 def getBintrayVersion() {
-  return project.properties['bintrayVersion'] ?: getBintrayVersion_()
+  return project.properties['bintrayVersion'] ?: android.defaultConfig.versionName
 }
 
 def getBintrayVersion_() {
