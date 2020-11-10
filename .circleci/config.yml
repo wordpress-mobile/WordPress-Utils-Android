@@ -61,9 +61,18 @@ jobs:
       - run:
           name: Experimental Bintray Upload
           command: |
-            if [[ -n "$CIRCLE_PULL_REQUEST" && -n "$CIRCLE_SHA1" ]]; then
+            branch=$CIRCLE_BRANCH
+            if [[ -n "$CIRCLE_PULL_REQUEST" ]]; then
+              if [[ -n "$CIRCLE_PULL_REQUEST" && -n "$CIRCLE_SHA1" ]]; then
               PR_NUMBER=$(basename $CIRCLE_PULL_REQUEST)
               PREFIX="$PR_NUMBER-$CIRCLE_SHA1"
+              fi
+            # Checking on master as well for retro-compatibility.
+            # Once all of the projects have migrated to trunk, we shall remove
+            # that check.
+            elif [[ "$branch" != "trunk" || "$branch" != "develop" || "$branch" != "master" ]]; then
+              echo "Running on a feature branch with no open PR: skipping Bintray upload"
+              exit 0
             fi
 
             # Locally, calling `./gradlew bintrayUpload` is enough to generate
