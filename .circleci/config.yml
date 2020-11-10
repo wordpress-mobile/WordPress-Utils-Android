@@ -70,7 +70,7 @@ jobs:
             # Checking on master as well for retro-compatibility.
             # Once all of the projects have migrated to trunk, we shall remove
             # that check.
-            elif [[ "$branch" != "trunk" || "$branch" != "develop" || "$branch" != "master" ]]; then
+            elif [[ "$branch" != "trunk" && "$branch" != "develop" && "$branch" != "master" ]]; then
               echo "Running on a feature branch with no open PR: skipping Bintray upload"
               exit 0
             fi
