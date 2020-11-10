@@ -87,65 +87,8 @@ android.libraryVariants.all { variant ->
     }
 }
 
-def getGitBranch() {
-  return 'git rev-parse --abbrev-ref HEAD'.execute().text.trim()
-}
-
-def getGitTag() {
-  def result = 'git describe --exact-match --tags HEAD'.execute().text.trim()
-
-  if (result.startsWith("fatal: no tag exactly matches")) {
-    return null
-  } else {
-    return result
-  }
-}
-
-def getCheckedOutGitCommitHash() {
-  return 'git rev-parse --verify --short HEAD'.execute().text.trim()
-}
-
 def getBintrayVersion() {
-  project.properties['bintrayVersion'] ?: getBintrayVersion_()
-}
-
-def getBintrayVersion_() {
-  // One option could be to use "branch-sha" as the version
-  // return "${getGitBranch()}-${getCheckedOutGitCommitHash()}"
-
-  // A more CI friendly option might be to just use the sha
-  def tag = getGitTag()
-
-  // It's not ideal to access CI environment variables from here, since this
-  // code could be run locally as well. The reasons this is this way right now
-  // is because of the logic to extract the PR number.
-  //
-  // See https://circleci.com/docs/2.0/env-vars/
-  def prURL = System.getenv('CIRCLE_PULL_REQUEST')
-  if (prURL) {
-    def pr = prURL.split('/').last()
-
-    if (pr) {
-      return "${pr}-${getCheckedOutGitCommitHash()}"
-    }
-  }
-
-  // Not on a PR. Are we on master|trunk?
-  if (getGitBranch() == 'master') {
-    // On master|trunk use the library version; these are production releases
-    return android.defaultConfig.versionName
-  }
-
-  // Are we on develop?
-  if (getGitBranch() == 'develop') {
-    // TODO: only return version if it's a "-beta.n" one
-  }
-
-  if (tag) {
-    return tag
-  } else {
-    return getCheckedOutGitCommitHash()
-  }
+  project.properties['bintrayVersion'] ?: android.defaultConfig.versionName
 }
 
 bintray {
