@@ -61,6 +61,11 @@ jobs:
       - run:
           name: Experimental Bintray Upload
           command: |
+            if [[ -n "$CIRCLE_PULL_REQUEST" && -n "$CIRCLE_SHA1" ]]; then
+              PR_NUMBER=$(basename $CIRCLE_PULL_REQUEST)
+              PREFIX="$PR_NUMBER-$CIRCLE_SHA1"
+            fi
+
             # Locally, calling `./gradlew bintrayUpload` is enough to generate
             # all the required artifacts. On CI, unless run each task
             # individually, the Bintray task will fail to find the .aar and
@@ -78,7 +83,11 @@ jobs:
             # See also the description and comments in this PR:
             # https://github.com/wordpress-mobile/WordPress-Utils-Android/pull/39
             ./gradlew --stacktrace generatePomFileForUtilsPublicationPublication
-            ./gradlew --stacktrace bintrayUpload
+
+            # If $PREFIX is not set, that is, if we're not on a PR but a merge
+            # commit on develop or trunk, the plugin will fallback to reading
+            # the version value from the source code.
+            ./gradlew --stacktrace bintrayUpload -PbintrayVersion=$PREFIX
       - android/save-gradle-cache
 
 workflows:
