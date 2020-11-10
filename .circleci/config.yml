@@ -51,7 +51,7 @@ jobs:
       - run:
           name: "Test: Extract PR and Git info from env"
           command: |
-            if [[ -n "$CIRCLE_PULL_REQUEST" && -n "$CIRCLE_SHA1"]]; then
+            if [[ -n "$CIRCLE_PULL_REQUEST" && -n "$CIRCLE_SHA1"]] then
               PR_NUMBER=$(basename $CIRCLE_PULL_REQUEST)
               PREFIX="$PR_NUMBER-$CIRCLE_SHA1"
             fi
