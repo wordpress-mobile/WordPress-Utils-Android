@@ -58,9 +58,6 @@ jobs:
             elif [[ "$branch" != "trunk" && "$branch" != "develop" ]]; then
               echo "Running on a feature branch with no open PR: skipping Bintray upload"
               exit 0
-            else
-              echo "Running on a production branch: skipping while trying to figure out a clean way to avoid republishing the same version."
-              exit 0
             fi
 
             # Locally, calling `./gradlew bintrayUpload` is enough to generate
