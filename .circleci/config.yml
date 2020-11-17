@@ -82,7 +82,10 @@ jobs:
             #
             # See also the description and comments in this PR:
             # https://github.com/wordpress-mobile/WordPress-Utils-Android/pull/39
-            ./gradlew --stacktrace generatePomFileForUtilsPublicationPublication
+            #
+            # Notice the `-PbintrayVersion` parameter to make sure the POM has
+            # the same version as the one bintrayUpload will use.
+            ./gradlew --stacktrace generatePomFileForUtilsPublicationPublication -PbintrayVersion=$PREFIX
 
             # If $PREFIX is not set, that is, if we're not on a PR but a merge
             # commit on develop or trunk, the plugin will fallback to reading
