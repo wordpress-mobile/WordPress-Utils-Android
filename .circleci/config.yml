@@ -45,7 +45,7 @@ jobs:
       - copy-gradle-properties
       - android/restore-gradle-cache
       - run:
-          name: Experimental Bintray Upload
+          name: Bintray Upload
           command: |
             branch=$CIRCLE_BRANCH
             if [[ -n "$CIRCLE_PULL_REQUEST" ]]; then
@@ -98,12 +98,8 @@ workflows:
   # because that's the default behavior
   WordPress-Utils-Android:
     jobs:
-      # - Lint
-      # - Test
-      # - Build:
-      #     requires:
-      #       - Test
-      # - Build and upload to Bintray:
-      #     requires:
-      #       - Build
-      - Build and upload to Bintray
+      - Lint
+      - Test
+      - Build and upload to Bintray:
+          requires:
+            - Test
