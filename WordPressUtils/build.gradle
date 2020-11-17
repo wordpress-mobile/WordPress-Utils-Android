@@ -99,8 +99,8 @@ bintray {
     publish = true
     pkg {
         repo = 'maven'
-        name = 'utils-experiment'
-        userOrg = 'mokagio'
+        name = 'utils'
+        userOrg = 'wordpress-mobile'
         licenses = ['MIT', 'GPL']
         vcsUrl = 'https://github.com/wordpress-mobile/WordPress-Utils-Android.git'
         version {
