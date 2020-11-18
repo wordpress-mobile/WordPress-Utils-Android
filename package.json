@@ -1,0 +1,14 @@
+{
+  "name": "WordPress-Utils-Android",
+  "version": "0.0.0",
+  "description": "test",
+  "main": "index.js",
+  "repository": "git@github.com:wordpress-mobile/WordPress-Utils-Android",
+  "author": "Gio <gio.lodi@automattic.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "danger": "^10.2.0",
+    "typescript": "^4.0.5"
+  }
+}

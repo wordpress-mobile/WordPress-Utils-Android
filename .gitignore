@@ -55,3 +55,5 @@ gradle.properties
 
 # Windows Backup
 *.bak
+
+node_modules/
