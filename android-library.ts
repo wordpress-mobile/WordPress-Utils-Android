@@ -7,6 +7,7 @@ export default async () => {
 
   if (modified_build_gradles.length == 0) {
     fail("Please update the library version before merging into `develop`")
+    return
   }
 
   // TODO: need to support multiple files
