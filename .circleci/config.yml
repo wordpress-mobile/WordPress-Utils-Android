@@ -75,7 +75,7 @@ jobs:
             # POM artifacts in the build/ folder.
             #
             # This builds the AAR.
-            ./gradlew --stacktrace assembleRelease
+            #./gradlew --stacktrace assembleRelease
 
             # This builds the POM.
             #
@@ -93,7 +93,7 @@ jobs:
             #
             # Notice the `-PbintrayVersion` parameter to make sure the POM has
             # the same version as the one bintrayUpload will use.
-            ./gradlew --stacktrace generatePomFileForUtilsPublicationPublication -PbintrayVersion=$PREFIX
+            #./gradlew --stacktrace generatePomFileForUtilsPublicationPublication -PbintrayVersion=$PREFIX
 
             # Finally, this uploads both AAR and POM to Bintray.
             ./gradlew --stacktrace bintrayUpload -PbintrayVersion=$PREFIX
