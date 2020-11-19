@@ -85,8 +85,9 @@ jobs:
             # find it and won't upload it.
             #
             # Worth noting that the Bintray plugin mentions the necessity for
-            # a workaround to generate the POM. See:
-            # https://github.com/bintray/gradle-bintray-plugin#maven-publications
+            # some workarounds to generate the POM under certain circumstances,
+            # although none of them apply to our current usage. See:
+            # https://github.com/bintray/gradle-bintray-plugin/tree/67718c3a65b64dbfe7534a82a178da2c57153a5d#maven-publications
             #
             # See also the description and comments in this PR:
             # https://github.com/wordpress-mobile/WordPress-Utils-Android/pull/39
