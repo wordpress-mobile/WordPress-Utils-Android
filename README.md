@@ -28,7 +28,7 @@ $ ./gradlew clean build
 $ ./gradlew bintrayUpload -PbintrayUser=FIXME -PbintrayKey=FIXME
 ```
 
-## Apps and libraries using WordPress-Utils-Android:
+## Apps and libraries using WordPress-Utils-Android: 
 
 - [WordPress for Android][2]
 - [FluxC][3]
