@@ -34,7 +34,7 @@ jobs:
       - android/restore-gradle-cache
       - run:
           name: Test
-          command: ./gradlew --stacktrace test
+          command: ./gradlew --stacktrace --dry-run test
       - android/save-gradle-cache
   Build and upload to Bintray:
     executor:
