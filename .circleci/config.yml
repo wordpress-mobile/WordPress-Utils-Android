@@ -90,8 +90,16 @@ jobs:
             #
             # See also the description and comments in this PR:
             # https://github.com/wordpress-mobile/WordPress-Utils-Android/pull/39
+            #
+            # Calling `assembleRelease` in the same `./gradlew` invocation as
+            # the other tasks results in the AAR not being found, so we'll call
+            # that alone first.
+            #
+            # See:
+            # https://app.circleci.com/pipelines/github/wordpress-mobile/WordPress-Utils-Android/165/workflows/b0cb954f-315d-4c54-99a7-c36d11eec5c8/jobs/342
+            ./gradlew --stacktrace assembleRelease
+
             ./gradlew --stacktrace \
-              assembleRelease \
               generatePomFileForUtilsPublicationPublication \
               bintrayUpload \
               -PbintrayVersion=$PREFIX
