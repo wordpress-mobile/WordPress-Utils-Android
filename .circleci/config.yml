@@ -69,35 +69,32 @@ jobs:
               exit 0
             fi
 
-            # Locally, calling `./gradlew bintrayUpload` is enough to generate
-            # all the required artifacts. On CI, unless run each task
-            # individually, the Bintray task will fail to find the AAR and
-            # POM artifacts in the build/ folder.
+            # Because we have Gradle's configure-on-demand option set to true,
+            # simply calling `bintrayUpload` won't generate the AAR and POM;
+            # we need to explicitly do it here.
             #
-            # This builds the AAR.
-            ./gradlew --stacktrace assembleRelease
-
-            # This builds the POM.
+            # See
+            # https://github.com/wordpress-mobile/circleci-orbs/blob/82f9821130890756e85277486ca0dde6cae25431/src/android/orb.yml#L19),
             #
-            # On local, the POM is generated automatically as part of
-            # assembleRelease, but that doesn't seem to be the case on CI. Here
-            # we need to explicitly generated it, otherwise bintrayUpload won't
-            # find it and won't upload it.
+            # - `assembleRelease` builds the AAR
+            # - `generatePomFileForUtilsPublicationPublication` builds the POM
+            # - `bintrayUpload` uploads both, using the version value set via
+            #   `-PbintrayVersion`
             #
             # Worth noting that the Bintray plugin mentions the necessity for
             # some workarounds to generate the POM under certain circumstances,
-            # although none of them apply to our current usage. See:
+            # although none of them apply to our current usage.
+            #
+            # See:
             # https://github.com/bintray/gradle-bintray-plugin/tree/67718c3a65b64dbfe7534a82a178da2c57153a5d#maven-publications
             #
             # See also the description and comments in this PR:
             # https://github.com/wordpress-mobile/WordPress-Utils-Android/pull/39
-            #
-            # Notice the `-PbintrayVersion` parameter to make sure the POM has
-            # the same version as the one bintrayUpload will use.
-            ./gradlew --stacktrace generatePomFileForUtilsPublicationPublication -PbintrayVersion=$PREFIX
-
-            # Finally, this uploads both AAR and POM to Bintray.
-            ./gradlew --stacktrace bintrayUpload -PbintrayVersion=$PREFIX
+            ./gradlew --stacktrace \
+              assembleRelease \
+              generatePomFileForUtilsPublicationPublication \
+              bintrayUpload \
+              -PbintrayVersion=$PREFIX
       - android/save-gradle-cache
 
 workflows:
