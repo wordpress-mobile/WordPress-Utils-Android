@@ -45,7 +45,8 @@ jobs:
       - checkout
       - copy-gradle-properties
       - android/restore-gradle-cache
-      - android/publish-to-bintray
+      - android/publish-to-bintray:
+        assemble_task: assembleDebug
       - android/save-gradle-cache
 
 workflows:
