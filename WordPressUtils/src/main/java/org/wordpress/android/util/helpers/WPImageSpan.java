@@ -82,6 +82,7 @@ public class WPImageSpan extends ImageSpan implements Parcelable {
         mediaFile.setPostID(in.readLong());
         mediaFile.setCaption(in.readString());
         mediaFile.setDescription(in.readString());
+        mediaFile.setAlt(in.readString());
         mediaFile.setTitle(in.readString());
         mediaFile.setMimeType(in.readString());
         mediaFile.setFileName(in.readString());
@@ -124,6 +125,7 @@ public class WPImageSpan extends ImageSpan implements Parcelable {
         parcel.writeLong(mMediaFile.getPostID());
         parcel.writeString(mMediaFile.getCaption());
         parcel.writeString(mMediaFile.getDescription());
+        parcel.writeString(mMediaFile.getAlt());
         parcel.writeString(mMediaFile.getTitle());
         parcel.writeString(mMediaFile.getMimeType());
         parcel.writeString(mMediaFile.getFileName());

@@ -19,6 +19,7 @@ public class MediaFile {
     protected String mTitle = null;
     protected String mDescription = null;
     protected String mCaption = null;
+    protected String mAlt = null;
     protected int mHorizontalAlignment; // 0 = none, 1 = left, 2 = center, 3 = right
     protected boolean mVerticalAligment = false; // false = bottom, true = top
     protected int mWidth = 500;
@@ -43,6 +44,7 @@ public class MediaFile {
         setPostID(MapUtils.getMapLong(resultMap, "parent"));
         setTitle(MapUtils.getMapStr(resultMap, "title"));
         setCaption(MapUtils.getMapStr(resultMap, "caption"));
+        setAlt(MapUtils.getMapStr(resultMap, "alt"));
         setDescription(MapUtils.getMapStr(resultMap, "description"));
         setVideoPressShortCode(MapUtils.getMapStr(resultMap, VIDEOPRESS_SHORTCODE_ID));
 
@@ -95,6 +97,7 @@ public class MediaFile {
         this.mTitle = mediaFile.mTitle;
         this.mDescription = mediaFile.mDescription;
         this.mCaption = mediaFile.mCaption;
+        this.mAlt = mediaFile.mAlt;
         this.mHorizontalAlignment = mediaFile.mHorizontalAlignment;
         this.mVerticalAligment = mediaFile.mVerticalAligment;
         this.mWidth = mediaFile.mWidth;
@@ -174,6 +177,14 @@ public class MediaFile {
 
     public void setDescription(String description) {
         this.mDescription = description;
+    }
+
+    public String getAlt() {
+        return mAlt;
+    }
+
+    public void setAlt(String alt) {
+        this.mAlt = alt;
     }
 
     public String getFileURL() {
@@ -329,8 +340,13 @@ public class MediaFile {
 
         String mediaTitle = StringUtils.notNullStr(getTitle());
 
-        String content = String.format(Locale.US, "<a href=\"%s\"><img title=\"%s\" %s alt=\"image\" src=\"%s\" /></a>",
-                                       fullSizeUrl, mediaTitle, alignmentCSS, resizedPictureURL);
+        String mediaAlt = StringUtils.notNullStr(getAlt());
+        if (TextUtils.isEmpty(mediaAlt)) {
+            mediaAlt = "image";
+        }
+
+        String content = String.format(Locale.US, "<a href=\"%s\"><img title=\"%s\" %s alt=\"%s\" src=\"%s\" /></a>",
+                                       fullSizeUrl, mediaTitle, mediaAlt, alignmentCSS, resizedPictureURL);
 
         if (!TextUtils.isEmpty(getCaption())) {
             content = String.format(Locale.US, "[caption id=\"\" align=\"%s\" width=\"%d\"]%s%s[/caption]",
