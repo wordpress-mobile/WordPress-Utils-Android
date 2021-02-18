@@ -30,7 +30,7 @@ class LogFileProvider(private val logFileDirectoryPath: String) : LogFileProvide
     override fun getLogFiles(): List<File> {
         return getLogFileDirectory()
                 .listFiles()
-                .sortedBy { it.lastModified() }
+                ?.sortedBy { it.lastModified() } ?: listOf()
     }
 
     companion object {
