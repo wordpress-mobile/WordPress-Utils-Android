@@ -1,10 +1,12 @@
 package org.wordpress.android.util.helpers.logfile
 
+import android.util.Log
 import org.jetbrains.annotations.TestOnly
 import java.io.File
 import java.io.FileWriter
 import java.util.Date
 import org.wordpress.android.util.DateTimeUtils
+import java.io.IOException
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -20,6 +22,7 @@ class LogFileWriter @JvmOverloads constructor(
 ) {
     private val file = File(logFileProvider.getLogFileDirectory(), "$fileId.log")
     private val fileWriter: FileWriter = FileWriter(file)
+    private var writingFailed = false
 
     /**
      * A serial executor used to write to the file in a background thread
@@ -37,9 +40,18 @@ class LogFileWriter @JvmOverloads constructor(
      * Writes the provided string to the log file synchronously
      */
     fun write(data: String) {
-        queue.execute {
-            fileWriter.write(data)
-            fileWriter.flush()
+        if (!writingFailed) {
+            queue.execute {
+                try {
+                    if (!writingFailed) {
+                        fileWriter.write(data)
+                        fileWriter.flush()
+                    }
+                } catch (ioe: IOException) {
+                    writingFailed = true
+                    Log.e("LogFileWriter", "Writing log failed: ${ioe.stackTrace}")
+                }
+            }
         }
     }
 }
