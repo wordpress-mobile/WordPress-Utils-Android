@@ -9,7 +9,6 @@ buildscript {
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath 'com.android.tools.build:gradle:4.0.1'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.5'
     }
 }
 
@@ -17,7 +16,6 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'maven-publish'
-apply plugin: 'com.jfrog.bintray'
 
 repositories {
     google()
@@ -88,29 +86,8 @@ android.libraryVariants.all { variant ->
     }
 }
 
-// Allows to override the artifact version by passing a -PbintrayVersion
-// parameter when calling Gradle
-def getBintrayVersion() {
-  return project.properties['bintrayVersion'] ?: android.defaultConfig.versionName
-}
-
-bintray {
-    user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
-    key = project.hasProperty('bintrayKey') ? project.property('bintrayKey') : System.getenv('BINTRAY_KEY')
-    publications = ['UtilsPublication']
-    publish = true
-    pkg {
-        repo = 'maven'
-        name = 'utils'
-        userOrg = 'wordpress-mobile'
-        licenses = ['MIT', 'GPL']
-        vcsUrl = 'https://github.com/wordpress-mobile/WordPress-Utils-Android.git'
-        version {
-            name = getBintrayVersion()
-            desc = 'Utils library for Android'
-            released  = new Date()
-        }
-    }
+def getPublishVersion() {
+  return project.properties['publishVersion'] ?: android.defaultConfig.versionName
 }
 
 // Because the components are created only during the `afterEvaluate` phase, we
@@ -126,7 +103,7 @@ project.afterEvaluate {
 
                 groupId 'org.wordpress'
                 artifactId 'utils'
-                version getBintrayVersion()
+                version getPublishVersion()
             }
         }
     }
