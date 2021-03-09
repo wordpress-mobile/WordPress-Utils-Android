@@ -106,6 +106,15 @@ project.afterEvaluate {
                 version getPublishVersion()
             }
         }
+        repositories {
+            maven {
+                url "s3://a8c-libs.s3.amazonaws.com/android"
+                credentials(AwsCredentials) {
+                    accessKey project.properties['awsAccessKey']
+                    secretKey project.properties['awsSecretKey']
+                }
+            }
+        }
     }
 }
 
