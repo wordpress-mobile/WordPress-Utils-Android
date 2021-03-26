@@ -110,8 +110,8 @@ project.afterEvaluate {
             maven {
                 url "s3://a8c-libs.s3.amazonaws.com/android"
                 credentials(AwsCredentials) {
-                    accessKey project.properties['awsAccessKey']
-                    secretKey project.properties['awsSecretKey']
+                    accessKey project.hasProperty('awsAccessKey') ? project.properties['awsAccessKey'] : System.getenv('AWS_ACCESS_KEY')
+                    secretKey project.hasProperty('awsSecretKey') ? project.properties['awsSecretKey'] : System.getenv('AWS_SECRET_KEY')
                 }
             }
         }
