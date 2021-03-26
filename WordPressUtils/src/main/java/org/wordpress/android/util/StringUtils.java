@@ -18,7 +18,7 @@ import java.util.Locale;
 public class StringUtils {
     // Just a test string which shouldn't make it to `develop`
     public static String testPublishToS3String() {
-        return "published-to-s3";
+        return "published-to-s3-test-2";
     }
 
     /**
