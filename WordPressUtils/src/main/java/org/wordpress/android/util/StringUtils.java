@@ -341,6 +341,10 @@ public class StringUtils {
         }
     }
 
+    public static String helloWorld() {
+        return "Hello World";
+    }
+
     /**
      * Formats the string for the given quantity, using the given arguments.
      * We need this because our translation platform doesn't support Android plurals.
