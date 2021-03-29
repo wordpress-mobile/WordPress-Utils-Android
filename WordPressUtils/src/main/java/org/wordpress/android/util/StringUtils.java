@@ -73,6 +73,10 @@ public class StringUtils {
         return ((String[]) result.toArray(new String[result.size()]));
     }
 
+    public static String prependBurger(String source) {
+        return "🍔 " + source;
+    }
+
     public static String convertHTMLTagsForUpload(String source) {
         // bold
         source = source.replace("<b>", "<strong>");
