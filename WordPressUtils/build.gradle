@@ -128,4 +128,9 @@ tasks.register('checkIfVersionIsAlreadyPublished') {
     }
 }
 
+tasks.register('successfullyPublished') {
+    println "'${getPublishVersion()}' was succesfully published."
+}
+
 publish.dependsOn(tasks.named('checkIfVersionIsAlreadyPublished'))
+publish.finalizedBy(tasks.named('successfullyPublished'))
