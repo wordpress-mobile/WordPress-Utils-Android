@@ -118,3 +118,14 @@ project.afterEvaluate {
     }
 }
 
+tasks.register('checkIfVersionIsAlreadyPublished') {
+    try {
+        def publishVersion = getPublishVersion()
+        new URL("https://a8c-libs.s3.amazonaws.com/android/org/wordpress/utils/${publishVersion}/utils-${publishVersion}.pom").bytes
+        throw new GradleException("'$publishVersion' is already published, please use a different version name. If this happened in CI for a PR, a new commit is necessary. If this happened for a tag, the existing version needs to be manually removed from S3.")
+    } catch (FileNotFoundException e) {
+        // Since the version doesn't already exist, proceed to publish
+    }
+}
+
+publish.dependsOn(tasks.named('checkIfVersionIsAlreadyPublished'))
