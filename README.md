@@ -4,7 +4,7 @@ Collection of utility methods for Android and WordPress.
 
 ## Use the library in your project
 
-* In your build.gradle:
+* In your `build.gradle`:
 ```groovy
 repositories {
     maven { url "https://a8c-libs.s3.amazonaws.com/android" }
@@ -17,7 +17,7 @@ dependencies {
 
 ## Publishing a new version
 
-In the following cases, CircleCI will publish a new version with the following format to our remote maven repo at S3:
+In the following cases, CircleCI will publish a new version with the following format to our remote Maven repo:
 
 * For each commit in an open PR: `<PR-number>-<commit full SHA1>`
 * Each time a PR is merged to `develop`: `develop-<commit full SHA1>`
