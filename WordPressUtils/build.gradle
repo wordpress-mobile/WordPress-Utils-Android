@@ -86,10 +86,6 @@ android.libraryVariants.all { variant ->
     }
 }
 
-def getPublishVersion() {
-  return project.properties['publishVersion'] ?: android.defaultConfig.versionName
-}
-
 // Because the components are created only during the `afterEvaluate` phase, we
 // must configure our publications using the `afterEvaluate()` lifecycle method
 //
@@ -101,8 +97,8 @@ project.afterEvaluate {
                 // Applies the component for the release build variant
                 from components.release
 
-                groupId 'org.wordpress'
-                artifactId 'utils'
+                groupId getGroupId()
+                artifactId getArtifactId()
                 version getPublishVersion()
             }
         }
@@ -118,22 +114,24 @@ project.afterEvaluate {
     }
 }
 
-tasks.register('checkIfVersionIsAlreadyPublished') {
-    def pomUrl = "https://a8c-libs.s3.amazonaws.com/android/org/wordpress/utils/${publishVersion}/utils-${publishVersion}.pom"
-    def responseCode = new URL(pomUrl).openConnection().with { connection ->
-        requestMethod = 'HEAD'
-        connect()
-        responseCode
-    }
-
-    if (responseCode == 200) {
-        throw new GradleException("'$publishVersion' is already published, please use a different version name. If this happened in CI for a PR, a new commit is necessary. If this happened for a tag, the existing version needs to be manually removed from S3.")
-    } else if (responseCode == 403) {
-        // S3 returns 403 status code if a file doesn't exist, which is what we want. Proceed to publish..
-    } else {
-        throw new GradleException("An unexpected status code ($responseCode) was received while checking if the version ($publishVersion) is already published to S3. If this issue persists, please contact Platform 9 team for help.")
-    }
+tasks.register('checkIfVersionIsAlreadyPublished', com.automattic.android.publish.CheckS3VersionTask) {
+    publishedGroupId = getGroupId()
+    moduleName = getArtifactId()
+    versionName = getPublishVersion()
 }
 
 publish.dependsOn(tasks.named('checkIfVersionIsAlreadyPublished'))
 publish.doLast { println "'$publishVersion' is succesfully published."}
+
+def getGroupId() {
+    return "org.wordpress"
+}
+
+def getArtifactId() {
+    return "utils"
+}
+
+def getPublishVersion() {
+  return project.properties['publishVersion'] ?: android.defaultConfig.versionName
+}
+
