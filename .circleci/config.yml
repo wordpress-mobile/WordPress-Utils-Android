@@ -48,9 +48,9 @@ jobs:
           name: S3 Upload
           command: |
             if [[ -n "$CIRCLE_PULL_REQUEST" ]]; then
-              VERSION=./gradlew -q calculateVersionName --branch-name=$CIRCLE_BRANCH --sha1=$CIRCLE_SHA1 --pull-request-url=$CIRCLE_PULL_REQUEST
+              VERSION=$(./gradlew -q calculateVersionName --branch-name=$CIRCLE_BRANCH --sha1=$CIRCLE_SHA1 --pull-request-url=$CIRCLE_PULL_REQUEST)
             else
-               VERSION=./gradlew -q calculateVersionName --branch-name=$CIRCLE_BRANCH --sha1=$CIRCLE_SHA1
+               VERSION=$(./gradlew -q calculateVersionName --branch-name=$CIRCLE_BRANCH --sha1=$CIRCLE_SHA1)
             fi
 
             if [[ -z "$VERSION" ]]; then
