@@ -47,14 +47,15 @@ jobs:
       - run:
           name: S3 Upload
           command: |
-            trap 'circleci-agent step halt' ERR 
+            PULL_REQUEST_PARAM=()
+            # Add the pull request url parameter if it exists
             if [[ -n "$CIRCLE_PULL_REQUEST" ]]; then
-              VERSION=$(./gradlew -q calculateVersionName --branch-name=$CIRCLE_BRANCH --sha1=$CIRCLE_SHA1 --pull-request-url=$CIRCLE_PULL_REQUEST)
-            else
-               VERSION=$(./gradlew -q calculateVersionName --branch-name=$CIRCLE_BRANCH --sha1=$CIRCLE_SHA1)
+                PULL_REQUEST_PARAM+=(--pull-request-url=$CIRCLE_PULL_REQUEST)
             fi
 
-            ./gradlew --stacktrace publish -PpublishVersion=$PREFIX
+            VERSION=$(./gradlew -q calculateVersionName --branch-name=$CIRCLE_BRANCH --sha1=$CIRCLE_SHA1 $PULL_REQUEST_PARAM || circleci-agent step halt)
+
+            ./gradlew --stacktrace publish -PpublishVersion=$VERSION
       - android/save-gradle-cache
 
 workflows:
