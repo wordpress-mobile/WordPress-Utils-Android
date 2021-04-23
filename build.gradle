@@ -1,14 +1,19 @@
 buildscript {
     repositories {
         jcenter()
+        maven {
+            url 'https://a8c-libs.s3.amazonaws.com/android'
+        }
     }
 
     dependencies {
         classpath 'com.automattic.android:fetchstyle:1.1'
+        classpath 'com.automattic.android:publish-to-s3:0.1'
     }
 }
 
 apply plugin: 'com.automattic.android.fetchstyle'
+apply plugin: 'com.automattic.android.publish-to-s3'
 
 allprojects {
     apply plugin: 'checkstyle'
