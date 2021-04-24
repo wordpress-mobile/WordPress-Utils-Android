@@ -26,16 +26,15 @@ commands:
               circleci-agent step halt
             fi
 
-            echo $VERSION > /tmp/s3-publish-version
+            echo "$VERSION" > /tmp/s3-publish-version
   assert-version-is-not-already-published-to-s3:
     steps:
       - run:
           name: Assert that previously calculated version is not already published to S3
           command: |
             VERSION=$(cat /tmp/s3-publish-version)
-            echo "Checking if '$VERSION' is already published to S3"
-            if [[ $(./gradlew checkIfVersionIsAlreadyPublished -PpublishVersion="$VERSION") ]]; then
-              echo "The following version is already published to S3 $VERSION"
+            if [[ $(./gradlew checkIfVersionIsAlreadyPublished -PpublishVersion="$VERSION") == "true" ]]; then
+              echo "'$VERSION' is already published to S3!"
               exit 1
             fi
 
