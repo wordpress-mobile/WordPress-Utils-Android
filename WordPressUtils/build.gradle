@@ -86,6 +86,10 @@ android.libraryVariants.all { variant ->
     }
 }
 
+def getPublishVersion() {
+  return project.properties['publishVersion'] ?: android.defaultConfig.versionName
+}
+
 // Because the components are created only during the `afterEvaluate` phase, we
 // must configure our publications using the `afterEvaluate()` lifecycle method
 //
@@ -97,8 +101,8 @@ project.afterEvaluate {
                 // Applies the component for the release build variant
                 from components.release
 
-                groupId getGroupId()
-                artifactId getArtifactId()
+                groupId 'org.wordpress'
+                artifactId 'utils'
                 version getPublishVersion()
             }
         }
@@ -115,23 +119,11 @@ project.afterEvaluate {
 }
 
 tasks.register('checkIfVersionIsAlreadyPublished', com.automattic.android.publish.CheckS3VersionTask) {
-    publishedGroupId = getGroupId()
-    moduleName = getArtifactId()
+    publishedGroupId = 'org.wordpress'
+    moduleName = 'utils'
     versionName = getPublishVersion()
 }
 
 publish.dependsOn(tasks.named('checkIfVersionIsAlreadyPublished'))
 publish.doLast { println "'$publishVersion' is succesfully published."}
-
-def getGroupId() {
-    return "org.wordpress"
-}
-
-def getArtifactId() {
-    return "utils"
-}
-
-def getPublishVersion() {
-  return project.properties['publishVersion'] ?: android.defaultConfig.versionName
-}
 
