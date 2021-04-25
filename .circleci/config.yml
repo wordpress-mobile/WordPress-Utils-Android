@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  android: wordpress-mobile/android@0.0.22
+  android: wordpress-mobile/android@dev:publish-to-s3
 
 commands:
   copy-gradle-properties:
@@ -9,34 +9,6 @@ commands:
       - run:
           name: Setup gradle.properties
           command: cp gradle.properties-example gradle.properties
-  calculate-s3-publish-version-name:
-    steps:
-      - run:
-          name: Calculate version name to be published to S3
-          command: |
-            PULL_REQUEST_PARAM=()
-            # Add the pull request url parameter if it exists
-            if [[ -n "$CIRCLE_PULL_REQUEST" ]]; then
-              PULL_REQUEST_PARAM+=(--pull-request-url=$CIRCLE_PULL_REQUEST)
-            fi
-
-            VERSION=$(./gradlew -q calculateVersionName --branch-name=$CIRCLE_BRANCH --sha1=$CIRCLE_SHA1 $PULL_REQUEST_PARAM || :)
-            if [[ -z "$VERSION" ]]; then
-              echo "Running on a feature branch with no open PR: skipping S3 upload"
-              circleci-agent step halt
-            fi
-
-            echo "$VERSION" > /tmp/s3-publish-version
-  assert-version-is-not-already-published-to-s3:
-    steps:
-      - run:
-          name: Assert that previously calculated version is not already published to S3
-          command: |
-            VERSION=$(cat /tmp/s3-publish-version)
-            if [[ $(./gradlew checkIfVersionIsAlreadyPublished -PpublishVersion="$VERSION") == "true" ]]; then
-              echo "'$VERSION' is already published to S3!"
-              exit 1
-            fi
 
 jobs:
   Lint:
@@ -72,13 +44,9 @@ jobs:
       - checkout
       - copy-gradle-properties
       - android/restore-gradle-cache
-      - calculate-s3-publish-version-name
-      - assert-version-is-not-already-published-to-s3
-      - run:
-          name: S3 Upload
-          command: |
-            VERSION=$(cat /tmp/s3-publish-version)
-            ./gradlew --stacktrace publish -PpublishVersion=$VERSION
+      - android/calculate-s3-publish-version-name
+      - android/assert-version-is-not-already-published-to-s3
+      - android/publish-to-s3
       - android/save-gradle-cache
 
 workflows:
