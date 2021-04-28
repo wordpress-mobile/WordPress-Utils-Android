@@ -5,17 +5,21 @@ buildscript {
     repositories {
         google()
         jcenter()
+        maven {
+            url 'https://a8c-libs.s3.amazonaws.com/android'
+        }
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath 'com.android.tools.build:gradle:4.0.1'
+        classpath 'com.automattic.android:publish-to-s3:0.1'
     }
 }
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'maven-publish'
+apply plugin: 'com.automattic.android.publish-to-s3'
 
 repositories {
     google()
@@ -86,44 +90,9 @@ android.libraryVariants.all { variant ->
     }
 }
 
-def getPublishVersion() {
-  return project.properties['publishVersion'] ?: android.defaultConfig.versionName
+configureS3PublishPlugin {
+    groupId = "org.wordpress"
+    artifactId = "utils"
+    from = "release"
 }
-
-// Because the components are created only during the `afterEvaluate` phase, we
-// must configure our publications using the `afterEvaluate()` lifecycle method
-//
-// See https://developer.android.com/studio/build/maven-publish-plugin
-project.afterEvaluate {
-    publishing {
-        publications {
-            UtilsPublication(MavenPublication) {
-                // Applies the component for the release build variant
-                from components.release
-
-                groupId 'org.wordpress'
-                artifactId 'utils'
-                version getPublishVersion()
-            }
-        }
-        repositories {
-            maven {
-                url "s3://a8c-libs.s3.amazonaws.com/android"
-                credentials(AwsCredentials) {
-                    accessKey project.hasProperty('awsAccessKey') ? project.properties['awsAccessKey'] : System.getenv('AWS_ACCESS_KEY')
-                    secretKey project.hasProperty('awsSecretKey') ? project.properties['awsSecretKey'] : System.getenv('AWS_SECRET_KEY')
-                }
-            }
-        }
-    }
-}
-
-tasks.register('checkIfVersionIsAlreadyPublished', com.automattic.android.publish.CheckS3VersionTask) {
-    publishedGroupId = 'org.wordpress'
-    moduleName = 'utils'
-    versionName = getPublishVersion()
-}
-
-publish.dependsOn(tasks.named('checkIfVersionIsAlreadyPublished'))
-publish.doLast { println "'$publishVersion' is succesfully published."}
 
