@@ -5,9 +5,7 @@ buildscript {
     repositories {
         google()
         jcenter()
-        maven {
-            url 'https://a8c-libs.s3.amazonaws.com/android'
-        }
+        maven { url 'https://a8c-libs.s3.amazonaws.com/android' }
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
@@ -90,7 +88,7 @@ android.libraryVariants.all { variant ->
     }
 }
 
-configureS3PublishPlugin {
+s3PublishPlugin {
     groupId = "org.wordpress"
     artifactId = "utils"
     from = "release"
