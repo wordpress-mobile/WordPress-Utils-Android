@@ -55,6 +55,5 @@ workflows:
     jobs:
       - Lint
       - Test
-      - Build and upload to S3:
-          requires:
-            - Test
+      - Build and upload to S3
+

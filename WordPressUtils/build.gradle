@@ -89,8 +89,8 @@ android.libraryVariants.all { variant ->
 }
 
 s3PublishPlugin {
-    groupId = "org.wordpress"
-    artifactId = "utils"
-    from = "release"
+    groupId "org.wordpress"
+    artifactId "utils"
+    from "release"
 }
 
