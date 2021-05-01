@@ -57,5 +57,5 @@ workflows:
       - Test
       - Build and upload to S3:
           requires:
-            - Test
+            - Test 
 
