@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  android: wordpress-mobile/android@dev:publish-to-s3
+  android: wordpress-mobile/android@dev:should-publish-library-artifacts
 
 commands:
   copy-gradle-properties:
@@ -41,6 +41,7 @@ jobs:
       name: android/default
       api-version: "27"
     steps:
+      - android/should-publish-library-artifacts
       - checkout
       - copy-gradle-properties
       - android/restore-gradle-cache
