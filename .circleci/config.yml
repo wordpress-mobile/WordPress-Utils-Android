@@ -50,8 +50,6 @@ jobs:
       - android/save-gradle-cache
 
 workflows:
-  # We don't want this to run on tags, but no filter statement is necessary
-  # because that's the default behavior
   WordPress-Utils-Android:
     jobs:
       - Lint
@@ -59,4 +57,7 @@ workflows:
       - Build and upload to S3:
           requires:
             - Test 
+          filters:
+            tags:
+              only: /.*/
 
