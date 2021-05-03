@@ -41,6 +41,12 @@ jobs:
       name: android/default
       api-version: "27"
     steps:
+      - run:
+          name: Print ENV
+          command: |
+            echo "tag: $CIRCLE_TAG"
+            echo "branch: $CIRCLE_BRANCH"
+            echo "PR: $CIRCLE_PULL_REQUEST"
       - android/should-publish-library-artifacts
       - checkout
       - copy-gradle-properties
@@ -56,7 +62,7 @@ workflows:
       - Test
       - Build and upload to S3:
           requires:
-            - Test 
+            - Test
           filters:
             tags:
               only: /.*/
