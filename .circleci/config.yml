@@ -53,7 +53,10 @@ workflows:
   WordPress-Utils-Android:
     jobs:
       - Lint
-      - Test
+      - Test:
+          filters:
+            tags:
+              only: /.*/
       - Build and upload to S3:
           requires:
             - Test 
