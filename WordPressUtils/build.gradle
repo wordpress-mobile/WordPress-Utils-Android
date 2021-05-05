@@ -5,19 +5,19 @@ buildscript {
     repositories {
         google()
         jcenter()
+        maven { url 'https://a8c-libs.s3.amazonaws.com/android' }
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath 'com.android.tools.build:gradle:4.0.1'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.5'
+        classpath 'com.automattic.android:publish-to-s3:0.2.2'
     }
 }
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'maven-publish'
-apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.automattic.android.publish-to-s3'
 
 repositories {
     google()
@@ -88,47 +88,9 @@ android.libraryVariants.all { variant ->
     }
 }
 
-// Allows to override the artifact version by passing a -PbintrayVersion
-// parameter when calling Gradle
-def getBintrayVersion() {
-  return project.properties['bintrayVersion'] ?: android.defaultConfig.versionName
-}
-
-bintray {
-    user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
-    key = project.hasProperty('bintrayKey') ? project.property('bintrayKey') : System.getenv('BINTRAY_KEY')
-    publications = ['UtilsPublication']
-    publish = true
-    pkg {
-        repo = 'maven'
-        name = 'utils'
-        userOrg = 'wordpress-mobile'
-        licenses = ['MIT', 'GPL']
-        vcsUrl = 'https://github.com/wordpress-mobile/WordPress-Utils-Android.git'
-        version {
-            name = getBintrayVersion()
-            desc = 'Utils library for Android'
-            released  = new Date()
-        }
-    }
-}
-
-// Because the components are created only during the `afterEvaluate` phase, we
-// must configure our publications using the `afterEvaluate()` lifecycle method
-//
-// See https://developer.android.com/studio/build/maven-publish-plugin
-project.afterEvaluate {
-    publishing {
-        publications {
-            UtilsPublication(MavenPublication) {
-                // Applies the component for the release build variant
-                from components.release
-
-                groupId 'org.wordpress'
-                artifactId 'utils'
-                version getBintrayVersion()
-            }
-        }
-    }
+s3PublishPlugin {
+    groupId "org.wordpress"
+    artifactId "utils"
+    from "release"
 }
 
