@@ -54,7 +54,6 @@ android {
     compileSdkVersion 29
 
     defaultConfig {
-        versionName "1.30.3-beta.3"
         minSdkVersion 18
         targetSdkVersion 29
 
