@@ -41,7 +41,7 @@ jobs:
       name: android/default
       api-version: "27"
     steps:
-      - android/should-publish-library-artifacts
+      - android/check-precondition-for-publish-artifacts
       - checkout
       - copy-gradle-properties
       - android/restore-gradle-cache
