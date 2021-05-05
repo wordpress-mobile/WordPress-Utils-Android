@@ -11,7 +11,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.wordpress:utils:1.31.0'
+    implementation 'org.wordpress:utils:1.40.0'
 }
 ```
 
