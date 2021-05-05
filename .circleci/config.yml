@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  android: wordpress-mobile/android@dev:publish-to-s3
+  android: wordpress-mobile/android@1.0.20
 
 commands:
   copy-gradle-properties:
@@ -41,6 +41,7 @@ jobs:
       name: android/default
       api-version: "27"
     steps:
+      - android/check-precondition-for-publish-artifacts
       - checkout
       - copy-gradle-properties
       - android/restore-gradle-cache
@@ -49,13 +50,17 @@ jobs:
       - android/save-gradle-cache
 
 workflows:
-  # We don't want this to run on tags, but no filter statement is necessary
-  # because that's the default behavior
   WordPress-Utils-Android:
     jobs:
       - Lint
-      - Test
+      - Test:
+          filters:
+            tags:
+              only: /.*/
       - Build and upload to S3:
           requires:
             - Test 
+          filters:
+            tags:
+              only: /.*/
 
