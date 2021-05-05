@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  android: wordpress-mobile/android@dev:should-publish-library-artifacts
+  android: wordpress-mobile/android@1.0.20
 
 commands:
   copy-gradle-properties:
