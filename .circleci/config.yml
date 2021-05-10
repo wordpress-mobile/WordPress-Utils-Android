@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  android: wordpress-mobile/android@dev:refactor-publish-to-s3-to-accept-gradle-task-param
+  android: wordpress-mobile/android@1.0.21
 
 commands:
   copy-gradle-properties:
