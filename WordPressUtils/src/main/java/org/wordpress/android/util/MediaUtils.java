@@ -31,6 +31,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -203,6 +205,14 @@ public class MediaUtils {
      * be revoked before the action completes. See https://github.com/wordpress-mobile/WordPress-Android/issues/5818
      */
     public static Uri downloadExternalMedia(Context context, Uri imageUri) {
+        return downloadExternalMedia(context, imageUri, null);
+    }
+
+    public static Uri downloadExternalMedia(
+            Context context,
+            Uri imageUri,
+            Map<String, String> headers
+    ) {
         if (context == null || imageUri == null) {
             return null;
         }
@@ -221,8 +231,15 @@ public class MediaUtils {
                     AppLog.e(T.UTILS, "openInputStream returned null");
                     return null;
                 }
-            } else {
+            } else if (headers == null || headers.isEmpty()) {
                 input = new URL(imageUri.toString()).openStream();
+            } else {
+                // if headers are present, let's pass them through the http request
+                final URLConnection connection = new URL(imageUri.toString()).openConnection();
+                for (Entry<String, String> header : headers.entrySet()) {
+                    connection.addRequestProperty(header.getKey(), header.getValue());
+                }
+                input = connection.getInputStream();
             }
 
             String fileName = getFilenameFromURI(context, imageUri);
