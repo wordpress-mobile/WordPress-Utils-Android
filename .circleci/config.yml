@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  android: wordpress-mobile/android@1.0.20
+  android: wordpress-mobile/android@1.0.21
 
 commands:
   copy-gradle-properties:
@@ -46,7 +46,7 @@ jobs:
       - copy-gradle-properties
       - android/restore-gradle-cache
       - android/publish-to-s3:
-          module_name: WordPressUtils
+          publish_gradle_task: :WordPressUtils:publishLibraryToS3
       - android/save-gradle-cache
 
 workflows:
