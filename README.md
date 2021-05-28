@@ -11,7 +11,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.wordpress:utils:1.40.0'
+    implementation 'org.wordpress:utils:2.0.0'
 }
 ```
 
@@ -21,7 +21,6 @@ In the following cases, CircleCI will publish a new version with the following f
 
 * For each commit in an open PR: `<PR-number>-<commit full SHA1>`
 * Each time a PR is merged to `develop`: `develop-<commit full SHA1>`
-* Each time a PR is merged to `trunk`: `trunk-<commit full SHA1>`
 * Each time a new tag is created: `{tag-name}`
 
 ## Apps and libraries using WordPress-Utils-Android:
