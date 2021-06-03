@@ -1,0 +1,13 @@
+# This is the default pipeline – it will build and test the app
+steps:
+  #################
+  # Lint & Checkstyle
+  #################
+  - label: "🧹 Lint & Checkstyle"
+    command: |
+        cp gradle.properties-example gradle.properties
+        ./gradlew lint checkstyle
+    plugins:
+      - docker#v3.8.0:
+          image: "wordpressmobile/android-build-image"
+
