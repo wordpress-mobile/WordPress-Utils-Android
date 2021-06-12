@@ -1,6 +1,6 @@
 buildscript {
     repositories {
-        jcenter()
+        maven { url 'https://a8c-libs.s3.amazonaws.com/android' }
     }
 
     dependencies {
@@ -12,13 +12,6 @@ apply plugin: 'com.automattic.android.fetchstyle'
 
 allprojects {
     apply plugin: 'checkstyle'
-
-    repositories {
-        jcenter()
-        maven {
-            url "https://maven.google.com"
-        }
-    }
 
     if (tasks.findByPath('checkstyle') == null) {
         tasks.create(name: 'checkstyle', type: Checkstyle) {
