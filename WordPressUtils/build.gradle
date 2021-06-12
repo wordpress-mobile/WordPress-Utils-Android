@@ -1,16 +1,13 @@
 buildscript {
-    ext.kotlinVersion = '1.5.10'
-    ext.kotlin_ktx_version = '1.5.0'
-
     repositories {
         google()
         mavenCentral()
         maven { url 'https://a8c-libs.s3.amazonaws.com/android' }
     }
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        classpath 'com.android.tools.build:gradle:4.2.1'
-        classpath 'com.automattic.android:publish-to-s3:0.4.0'
+        classpath(libs.plugin.kotlinGradlePlugin)
+        classpath(libs.plugin.androidGradlePlugin)
+        classpath(libs.plugin.publishToS3)
     }
 }
 
@@ -29,17 +26,17 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.kotlin.stdlib)
 
-    testImplementation(libs.junit)
-    testImplementation(libs.assertj.core)
-    testImplementation(libs.robolectric)
-    testImplementation(libs.androidx.test.core)
+    testImplementation(libs.test.junit)
+    testImplementation(libs.test.assertj.core)
+    testImplementation(libs.test.robolectric)
+    testImplementation(libs.test.androidx.core)
 
-    androidTestImplementation(libs.androidx.test.runner)
-    androidTestImplementation(libs.androidx.test.rules)
-    androidTestImplementation(libs.androidx.test.junit)
-    androidTestImplementation(libs.uiautomator)
+    androidTestImplementation(libs.test.androidx.runner)
+    androidTestImplementation(libs.test.androidx.rules)
+    androidTestImplementation(libs.test.androidx.junit)
+    androidTestImplementation(libs.test.uiautomator)
 
-    lintChecks(libs.wordpress.lint)
+    lintChecks(libs.lint.wordpress)
 }
 
 android {

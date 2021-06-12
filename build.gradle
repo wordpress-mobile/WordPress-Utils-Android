@@ -4,7 +4,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.automattic.android:fetchstyle:1.1'
+        classpath(libs.plugin.fetchstyle)
     }
 }
 
