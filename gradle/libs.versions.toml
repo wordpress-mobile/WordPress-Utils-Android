@@ -1,50 +1,50 @@
 [versions]
-ver-kotlin-ktx = "1.5.0"
-ver-kotlin-stdlib = "1.5.10"
+kotlin-ktx = "1.5.0"
+kotlin-stdlib = "1.5.10"
 
-ver-androidx-swiperefreshlayout = "1.1.0"
-ver-androidx-recyclerview = "1.0.0"
+androidx-swiperefreshlayout = "1.1.0"
+androidx-recyclerview = "1.0.0"
 
-ver-androidx-test-core = "1.0.0"
-ver-androidx-test-runner = "1.1.0"
-ver-androidx-test-rules = "1.1.0"
-ver-androidx-test-junit = "1.1.0"
+androidx-test-core = "1.0.0"
+androidx-test-runner = "1.1.0"
+androidx-test-rules = "1.1.0"
+androidx-test-junit = "1.1.0"
 
-ver-volley = "1.2.0"
-ver-material = "1.2.1"
-ver-uiautomator = "2.1.2"
+volley = "1.2.0"
+material = "1.2.1"
+uiautomator = "2.1.2"
 
-ver-junit = "4.12"
+junit = "4.12"
 
-ver-commons-text = "1.1"
-ver-eventbus = "3.0.0"
-ver-assertj-core = "3.11.1"
-ver-robolectric = "4.4"
+commons-text = "1.1"
+eventbus = "3.0.0"
+assertj-core = "3.11.1"
+robolectric = "4.4"
 
-ver-wordpress-lint = "1.1.0"
+wordpress-lint = "1.1.0"
 
 [libraries]
 
-androidx-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "ver-androidx-swiperefreshlayout" }
-androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "ver-androidx-recyclerview" }
-androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref= "ver-kotlin-ktx" }
+androidx-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "androidx-swiperefreshlayout" }
+androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "androidx-recyclerview" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref= "kotlin-ktx" }
 
-androidx-test-core = { module = "androidx.test:core", version.ref= "ver-androidx-test-core" }
-androidx-test-runner = { module = "androidx.test:runner", version.ref= "ver-androidx-test-runner" }
-androidx-test-rules = { module = "androidx.test:rules", version.ref= "ver-androidx-test-rules" }
-androidx-test-junit = { module = "androidx.test.ext:junit", version.ref= "ver-androidx-test-junit" }
+androidx-test-core = { module = "androidx.test:core", version.ref= "androidx-test-core" }
+androidx-test-runner = { module = "androidx.test:runner", version.ref= "androidx-test-runner" }
+androidx-test-rules = { module = "androidx.test:rules", version.ref= "androidx-test-rules" }
+androidx-test-junit = { module = "androidx.test.ext:junit", version.ref= "androidx-test-junit" }
 
-volley = { module = "com.android.volley:volley", version.ref = "ver-volley" }
-material = { module = "com.google.android.material:material", version.ref = "ver-material" }
-uiautomator = { module = "com.android.support.test.uiautomator:uiautomator-v18", version.ref = "ver-uiautomator" }
+volley = { module = "com.android.volley:volley", version.ref = "volley" }
+material = { module = "com.google.android.material:material", version.ref = "material" }
+uiautomator = { module = "com.android.support.test.uiautomator:uiautomator-v18", version.ref = "uiautomator" }
 
-junit = { module = "junit:junit", version.ref= "ver-junit" }
+junit = { module = "junit:junit", version.ref= "junit" }
 
-commons-text = { module = "org.apache.commons:commons-text", version.ref = "ver-commons-text" }
-eventbus = { module = "org.greenrobot:eventbus", version.ref = "ver-eventbus" }
-kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk7", version.ref= "ver-kotlin-stdlib" }
-assertj-core = { module = "org.assertj:assertj-core", version.ref= "ver-assertj-core" }
-robolectric = { module = "org.robolectric:robolectric", version.ref= "ver-robolectric" }
+commons-text = { module = "org.apache.commons:commons-text", version.ref = "commons-text" }
+eventbus = { module = "org.greenrobot:eventbus", version.ref = "eventbus" }
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk7", version.ref= "kotlin-stdlib" }
+assertj-core = { module = "org.assertj:assertj-core", version.ref= "assertj-core" }
+robolectric = { module = "org.robolectric:robolectric", version.ref= "robolectric" }
 
-wordpress-lint = {  module = "org.wordpress:lint", version.ref = "ver-wordpress-lint" }
+wordpress-lint = {  module = "org.wordpress:lint", version.ref = "wordpress-lint" }
 
