@@ -1,1 +1,15 @@
+pluginManagement {
+    gradle.ext.kotlinVersion = "1.5.10"
+
+    repositories {
+        gradlePluginPortal()
+        google()
+    }
+    plugins {
+        id "org.jetbrains.kotlin.android" version gradle.ext.kotlinVersion
+        id "org.jetbrains.kotlin.jvm" version gradle.ext.kotlinVersion
+        id "com.android.library" version "4.2.1"
+        id 'com.autonomousapps.dependency-analysis' version "0.73.0"
+    }
+}
 include ':WordPressUtils'
