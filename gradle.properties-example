@@ -1,1 +1,6 @@
+org.gradle.jvmargs=-Xmx6g -XX:+HeapDumpOnOutOfMemoryError
+org.gradle.parallel=true
+org.gradle.configureondemand=true
+org.gradle.caching=true
+
 android.useAndroidX=true
