@@ -7,7 +7,7 @@ steps:
       #        ./gradlew lint checkstyle
     plugins:
       - docker#v3.8.0:
-          image: "public.ecr.aws/m4u4m2y0/android-build-image:edde647bcbe5034ea39a14e9514c6b05636a7bf9"
+          image: "public.ecr.aws/m4u4m2y0/android-build-image:02db9ae7aea96f767be97dcc17db677d37e41480"
           environment:
-            - "CI=true"
+            propagate-environment: true
 
