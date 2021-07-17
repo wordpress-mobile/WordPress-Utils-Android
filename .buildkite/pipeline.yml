@@ -6,6 +6,7 @@ steps:
       echo "--"
       source /scripts/prepare_to_publish_to_s3_params.sh
       echo "PARAMS: $(prepare_to_publish_to_s3_params)"
+      prepare_to_publish_to_s3_params
       #        cp gradle.properties-example gradle.properties
       #        ./gradlew lint checkstyle
     plugins:
