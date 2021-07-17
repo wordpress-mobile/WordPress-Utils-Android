@@ -1,11 +1,13 @@
 steps:
   - label: "🧹 Lint & Checkstyle"
     command: |
-        cp gradle.properties-example gradle.properties
-        ./gradlew lint checkstyle
+      source /scripts/prepare_to_publish_to_s3_params.sh
+      echo "PARAMS: $(prepare_to_publish_to_s3_params)"
+      #        cp gradle.properties-example gradle.properties
+      #        ./gradlew lint checkstyle
     plugins:
       - docker#v3.8.0:
-          image: "wordpressmobile/android-build-image"
+          image: "public.ecr.aws/m4u4m2y0/android-build-image:edde647bcbe5034ea39a14e9514c6b05636a7bf9"
           environment:
             - "CI=true"
 
