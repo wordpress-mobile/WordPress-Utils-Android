@@ -10,14 +10,14 @@ buildscript {
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath 'com.android.tools.build:gradle:4.0.2'
-        classpath 'com.automattic.android:publish-to-s3:0.4.2'
+        classpath 'com.automattic.android:publish-to-s3:0.6.1'
     }
 }
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'com.automattic.android.publish-library-to-s3'
+apply plugin: 'com.automattic.android.publish-to-s3'
 
 repositories {
     google()
@@ -87,9 +87,22 @@ android.libraryVariants.all { variant ->
     }
 }
 
-s3PublishLibrary {
-    groupId "org.wordpress"
-    artifactId "utils"
-    from "release"
+project.afterEvaluate {
+    publishing {
+        publications {
+            UtilsPublication(MavenPublication) {
+                from components.release
+
+                groupId "org.wordpress"
+                artifactId "utils"
+                // version is set by 'publish-to-s3' plugin
+            }
+        }
+   }
+}
+
+publishToS3Plugin {
+    mavenPublishGroupId "org.wordpress"
+    mavenPublishArtifactId "utils"
 }
 
