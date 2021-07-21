@@ -1,11 +1,12 @@
 steps:
   - label: "🧹 Lint & Checkstyle"
     command: |
+        cd /WordPress-Utils-Android
         cp gradle.properties-example gradle.properties
         ./gradlew lint checkstyle
     plugins:
       - docker#v3.8.0:
-          image: "wordpressmobile/android-build-image"
+          image: "public.ecr.aws/automattic/android-build-image:8295498ec2fcbc365f3fba5a2a15e8aa26694963"
           environment:
             - "CI=true"
 
