@@ -6,5 +6,6 @@ steps:
     plugins:
       - docker#v3.8.0:
           image: "public.ecr.aws/automattic/android-build-image:aa7b7ee2dd9e6da7507147a9f553b96047c173c0"
+          mount-checkout: false
           environment:
             - "CI=true"
