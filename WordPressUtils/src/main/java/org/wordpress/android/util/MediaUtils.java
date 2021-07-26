@@ -45,7 +45,8 @@ public class MediaUtils {
             return false;
         }
         url = url.toLowerCase(Locale.ROOT);
-        return url.endsWith(".png") || url.endsWith(".jpg") || url.endsWith(".jpeg") || url.endsWith(".gif");
+        return url.endsWith(".png") || url.endsWith(".jpg") || url.endsWith(".jpeg") || url.endsWith(".gif")
+               || url.endsWith(".webp");
     }
 
     public static boolean isDocument(String url) {
