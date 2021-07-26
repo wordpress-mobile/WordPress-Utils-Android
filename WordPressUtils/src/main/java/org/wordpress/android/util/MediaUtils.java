@@ -15,8 +15,6 @@ import android.provider.OpenableColumns;
 import android.text.TextUtils;
 import android.webkit.MimeTypeMap;
 
-import androidx.annotation.Nullable;
-
 import org.wordpress.android.util.AppLog.T;
 
 import java.io.DataInputStream;
@@ -36,6 +34,8 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import androidx.annotation.Nullable;
+
 public class MediaUtils {
     private static final int DEFAULT_MAX_IMAGE_WIDTH = 1024;
     private static final Pattern FILE_EXISTS_PATTERN = Pattern.compile("(.*?)(-([0-9]+))?(\\..*$)?");
@@ -46,7 +46,7 @@ public class MediaUtils {
         }
         url = url.toLowerCase(Locale.ROOT);
         return url.endsWith(".png") || url.endsWith(".jpg") || url.endsWith(".jpeg") || url.endsWith(".gif")
-                || url.endsWith(".webp");
+               || url.endsWith(".webp");
     }
 
     public static boolean isDocument(String url) {
