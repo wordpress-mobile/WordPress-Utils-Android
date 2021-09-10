@@ -46,7 +46,7 @@ jobs:
       - copy-gradle-properties
       - android/restore-gradle-cache
       - android/publish-to-s3:
-          publish_gradle_task: :WordPressUtils:publishLibraryToS3
+          publish_gradle_task: :WordPressUtils:publish
       - android/save-gradle-cache
 
 workflows:
@@ -59,7 +59,7 @@ workflows:
               only: /.*/
       - Build and upload to S3:
           requires:
-            - Test 
+            - Test
           filters:
             tags:
               only: /.*/
