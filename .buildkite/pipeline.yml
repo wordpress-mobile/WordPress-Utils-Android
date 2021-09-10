@@ -14,13 +14,17 @@ steps:
     key: "lint_and_checkstyle"
     plugins:
       - *docker-container
-    command: ./gradlew lint checkstyle
+    command: |
+      cp gradle.properties-example gradle.properties
+      ./gradlew lint checkstyle
 
   - label: "Test"
     key: "test"
     plugins:
       - *docker-container
-    command: ./gradlew test
+    command: |
+      cp gradle.properties-example gradle.properties
+      ./gradlew test
 
   - label: "Build and upload to S3"
     depends_on:
@@ -29,6 +33,7 @@ steps:
     plugins:
       - *docker-container
     command: |
+      cp gradle.properties-example gradle.properties
       ./gradlew \
           :WordPressUtils:prepareToPublishToS3 $(prepare_to_publish_to_s3_params) \
           :WordPressUtils:publish
