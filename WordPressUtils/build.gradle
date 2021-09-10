@@ -61,7 +61,7 @@ android {
 project.afterEvaluate {
     publishing {
         publications {
-            StoriesPublication(MavenPublication) {
+            UtilsPublication(MavenPublication) {
                 from components.release
 
                 groupId "org.wordpress"
