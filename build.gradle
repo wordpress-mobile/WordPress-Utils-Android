@@ -3,6 +3,8 @@ plugins {
 }
 
 allprojects {
+    apply plugin: 'checkstyle'
+
     if (tasks.findByPath('checkstyle') == null) {
         tasks.create(name: 'checkstyle', type: Checkstyle) {
             source 'src'
@@ -11,6 +13,7 @@ allprojects {
         }
 
         checkstyle {
+            toolVersion = '8.3'
             configFile file("${project.rootDir}/config/checkstyle.xml")
         }
     }
