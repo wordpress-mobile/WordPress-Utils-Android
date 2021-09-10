@@ -1,18 +1,8 @@
-buildscript {
-    repositories {
-        maven { url 'https://a8c-libs.s3.amazonaws.com/android' }
-    }
-
-    dependencies {
-        classpath 'com.automattic.android:fetchstyle:1.1'
-    }
+plugins {
+    id "com.automattic.android.fetchstyle"
 }
 
-apply plugin: 'com.automattic.android.fetchstyle'
-
 allprojects {
-    apply plugin: 'checkstyle'
-
     if (tasks.findByPath('checkstyle') == null) {
         tasks.create(name: 'checkstyle', type: Checkstyle) {
             source 'src'
@@ -21,7 +11,6 @@ allprojects {
         }
 
         checkstyle {
-            toolVersion = '8.3'
             configFile file("${project.rootDir}/config/checkstyle.xml")
         }
     }

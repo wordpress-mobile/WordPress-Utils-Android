@@ -1,22 +1,10 @@
-buildscript {
-    ext.kotlinVersion = '1.5.10'
-    ext.kotlin_ktx_version = '1.5.0'
-
-    repositories {
-        google()
-        mavenCentral()
-        maven { url 'https://a8c-libs.s3.amazonaws.com/android' }
-    }
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        classpath 'com.android.tools.build:gradle:4.2.1'
-        classpath 'com.automattic.android:publish-to-s3:0.4.2'
-    }
+plugins {
+    id "com.android.library"
+    id "org.jetbrains.kotlin.android"
+    id "com.automattic.android.publish-to-s3"
 }
 
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'com.automattic.android.publish-library-to-s3'
+ext.kotlin_ktx_version = '1.5.0'
 
 repositories {
     google()
@@ -33,7 +21,7 @@ dependencies {
     implementation 'org.greenrobot:eventbus:3.0.0'
 
     implementation "androidx.core:core-ktx:$kotlin_ktx_version"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$gradle.ext.kotlinVersion"
 
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.assertj:assertj-core:3.11.1'
@@ -70,9 +58,22 @@ android {
     }
 }
 
-s3PublishLibrary {
-    groupId "org.wordpress"
-    artifactId "utils"
-    from "release"
+project.afterEvaluate {
+    publishing {
+        publications {
+            StoriesPublication(MavenPublication) {
+                from components.release
+
+                groupId "org.wordpress"
+                artifactId "utils"
+                // version is set by 'publish-to-s3' plugin
+            }
+        }
+   }
+}
+
+publishToS3Plugin {
+    mavenPublishGroupId "org.wordpress"
+    mavenPublishArtifactId "utils"
 }
 
