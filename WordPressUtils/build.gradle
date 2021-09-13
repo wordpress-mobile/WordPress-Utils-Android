@@ -1,46 +1,34 @@
-buildscript {
-    ext.kotlinVersion = '1.4.10'
-    ext.kotlin_ktx_version = '1.2.0'
-
-    repositories {
-        google()
-        jcenter()
-        maven { url 'https://a8c-libs.s3.amazonaws.com/android' }
-    }
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        classpath 'com.android.tools.build:gradle:4.0.2'
-        classpath 'com.automattic.android:publish-to-s3:0.4.2'
-    }
+plugins {
+    id "com.android.library"
+    id "org.jetbrains.kotlin.android"
+    id "com.automattic.android.publish-to-s3"
 }
 
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'com.automattic.android.publish-library-to-s3'
+ext.kotlin_ktx_version = '1.5.0'
 
 repositories {
     google()
-    jcenter()
+    mavenCentral()
+    maven { url 'https://a8c-libs.s3.amazonaws.com/android' }
 }
 
 dependencies {
     implementation 'org.apache.commons:commons-text:1.1'
-    implementation 'com.android.volley:volley:1.1.1'
+    implementation 'com.android.volley:volley:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'org.greenrobot:eventbus:3.0.0'
 
     implementation "androidx.core:core-ktx:$kotlin_ktx_version"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$gradle.ext.kotlinVersion"
 
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.assertj:assertj-core:3.11.1'
     testImplementation "org.robolectric:robolectric:4.4"
     testImplementation 'androidx.test:core:1.0.0'
 
-    lintChecks 'org.wordpress:lint:1.0.1'
+    lintChecks 'org.wordpress:lint:1.1.0'
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test:rules:1.1.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
@@ -70,26 +58,22 @@ android {
     }
 }
 
-android.libraryVariants.all { variant ->
-    task("generate${variant.name}Javadoc", type: Javadoc) {
-        description "Generates Javadoc for $variant.name."
-        source = variant.javaCompile.source
+project.afterEvaluate {
+    publishing {
+        publications {
+            UtilsPublication(MavenPublication) {
+                from components.release
 
-        options {
-            links "http://docs.oracle.com/javase/7/docs/api/"
+                groupId "org.wordpress"
+                artifactId "utils"
+                // version is set by 'publish-to-s3' plugin
+            }
         }
-        exclude '**/R.java'
-        doFirst {
-            classpath =
-                    files(variant.javaCompile.classpath.files,
-                            project.android.getBootClasspath())
-        }
-    }
+   }
 }
 
-s3PublishLibrary {
-    groupId "org.wordpress"
-    artifactId "utils"
-    from "release"
+publishToS3Plugin {
+    mavenPublishGroupId "org.wordpress"
+    mavenPublishArtifactId "utils"
 }
 
