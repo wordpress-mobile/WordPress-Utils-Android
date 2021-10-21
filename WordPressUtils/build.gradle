@@ -58,6 +58,11 @@ android {
     }
 }
 
+tasks.register("sourcesJar", Jar) {
+    from sourceSets.main.allJava
+    classifier "sources"
+}
+
 project.afterEvaluate {
     publishing {
         publications {
@@ -66,7 +71,7 @@ project.afterEvaluate {
 
                 groupId "org.wordpress"
                 artifactId "utils"
-                artifact tasks.named("androidSourcesJar")
+                artifact tasks.named("sourcesJar")
                 // version is set by 'publish-to-s3' plugin
             }
         }
