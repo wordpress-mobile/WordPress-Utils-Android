@@ -19,6 +19,7 @@ steps:
       ./gradlew lint checkstyle
     artifact_paths:
       - "**/build/reports/lint-results.*"
+      - "**/build/reports/checkstyle/checkstyle.*"
 
   - label: "Test"
     key: "test"
