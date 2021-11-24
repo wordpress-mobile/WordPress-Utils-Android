@@ -11,6 +11,8 @@ import android.view.Display;
 import android.view.Window;
 import android.view.WindowManager;
 
+import androidx.annotation.NonNull;
+
 public class DisplayUtils {
     private DisplayUtils() {
         throw new AssertionError();
@@ -39,11 +41,21 @@ public class DisplayUtils {
         return getWindowSize(context).height();
     }
 
-    public static int getWindowPixelWidth(Context context) {
+    /**
+     * Calculates the width of the application's window
+     * @param context
+     * @return the width of the window
+     */
+    public static int getWindowPixelWidth(@NonNull Context context) {
         return getWindowSize(context).width();
     }
 
-    public static int getWindowPixelHeight(Context context) {
+    /**
+     * Calculates the height of the application's window
+     * @param context
+     * @return the height of the window
+     */
+    public static int getWindowPixelHeight(@NonNull Context context) {
         return getWindowSize(context).height();
     }
 
@@ -59,6 +71,9 @@ public class DisplayUtils {
         }
     }
 
+    /**
+     * @return the width of the device's screen
+     */
     public static int getDisplayPixelWidth() {
         return Resources.getSystem().getDisplayMetrics().widthPixels;
     }
