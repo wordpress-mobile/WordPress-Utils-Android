@@ -9,7 +9,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
@@ -754,9 +753,8 @@ public class ImageUtils {
      */
     public static int getMaximumThumbnailWidthForEditor(Context context) {
         int maximumThumbnailWidthForEditor;
-        Point size = DisplayUtils.getDisplayPixelSize(context);
-        int screenWidth = size.x;
-        int screenHeight = size.y;
+        int screenWidth = DisplayUtils.getWindowPixelWidth(context);
+        int screenHeight = DisplayUtils.getWindowPixelHeight(context);
         maximumThumbnailWidthForEditor = (screenWidth > screenHeight) ? screenHeight : screenWidth;
         // 48dp of padding on each side so you can still place the cursor next to the image.
         int padding = DisplayUtils.dpToPx(context, 48) * 2;

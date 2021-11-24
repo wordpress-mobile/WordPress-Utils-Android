@@ -3,7 +3,8 @@ package org.wordpress.android.util;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.graphics.Point;
+import android.graphics.Rect;
+import android.os.Build;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Display;
@@ -22,22 +23,40 @@ public class DisplayUtils {
         return context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
     }
 
-    public static Point getDisplayPixelSize(Context context) {
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        return size;
-    }
-
+    /**
+     * @deprecated please use {@link #getWindowPixelWidth(Context)} instead
+     */
+    @Deprecated
     public static int getDisplayPixelWidth(Context context) {
-        Point size = getDisplayPixelSize(context);
-        return (size.x);
+        return getWindowSize(context).width();
     }
 
+    /**
+     * @deprecated please use {@link #getWindowPixelHeight(Context)} instead
+     */
+    @Deprecated
     public static int getDisplayPixelHeight(Context context) {
-        Point size = getDisplayPixelSize(context);
-        return (size.y);
+        return getWindowSize(context).height();
+    }
+
+    public static int getWindowPixelWidth(Context context) {
+        return getWindowSize(context).width();
+    }
+
+    public static int getWindowPixelHeight(Context context) {
+        return getWindowSize(context).height();
+    }
+
+    private static Rect getWindowSize(Context context) {
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            return wm.getCurrentWindowMetrics().getBounds();
+        } else {
+            Display display = wm.getDefaultDisplay();
+            Rect rect = new Rect();
+            display.getRectSize(rect);
+            return rect;
+        }
     }
 
     public static int getDisplayPixelWidth() {
