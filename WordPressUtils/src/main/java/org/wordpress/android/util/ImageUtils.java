@@ -755,7 +755,7 @@ public class ImageUtils {
         int maximumThumbnailWidthForEditor;
         int screenWidth = DisplayUtils.getWindowPixelWidth(context);
         int screenHeight = DisplayUtils.getWindowPixelHeight(context);
-        maximumThumbnailWidthForEditor = (screenWidth > screenHeight) ? screenHeight : screenWidth;
+        maximumThumbnailWidthForEditor = Math.min(screenWidth, screenHeight);
         // 48dp of padding on each side so you can still place the cursor next to the image.
         int padding = DisplayUtils.dpToPx(context, 48) * 2;
         maximumThumbnailWidthForEditor -= padding;
