@@ -3,6 +3,7 @@ package org.wordpress.android.util;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Build;
 import android.util.DisplayMetrics;
@@ -25,6 +26,22 @@ public class DisplayUtils {
         return context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
     }
 
+    /**
+     * Calculates the size of the application's window
+     * @param context
+     * @return Point with the window's dimenstions
+     * 
+     * @deprecated please use {@link #getWindowSize(Context)}
+     */
+    @Deprecated
+    public static Point getDisplayPixelSize(Context context) {
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        return size;
+    }
+    
     /**
      * @deprecated please use {@link #getWindowPixelWidth(Context)} instead
      */
@@ -59,7 +76,7 @@ public class DisplayUtils {
         return getWindowSize(context).height();
     }
 
-    private static Rect getWindowSize(Context context) {
+    public static Rect getWindowSize(Context context) {
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             return wm.getCurrentWindowMetrics().getBounds();
