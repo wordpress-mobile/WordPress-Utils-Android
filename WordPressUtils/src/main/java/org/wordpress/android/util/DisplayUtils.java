@@ -4,11 +4,15 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Point;
+import android.graphics.Rect;
+import android.os.Build;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.Window;
 import android.view.WindowManager;
+
+import androidx.annotation.NonNull;
 
 public class DisplayUtils {
     private DisplayUtils() {
@@ -22,6 +26,14 @@ public class DisplayUtils {
         return context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
     }
 
+    /**
+     * Calculates the size of the application's window
+     * @param context
+     * @return Point with the window's dimenstions
+     * 
+     * @deprecated please use {@link #getWindowSize(Context)}
+     */
+    @Deprecated
     public static Point getDisplayPixelSize(Context context) {
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
@@ -29,17 +41,56 @@ public class DisplayUtils {
         display.getSize(size);
         return size;
     }
-
+    
+    /**
+     * @deprecated please use {@link #getWindowPixelWidth(Context)} instead
+     */
+    @Deprecated
     public static int getDisplayPixelWidth(Context context) {
-        Point size = getDisplayPixelSize(context);
-        return (size.x);
+        return getWindowSize(context).width();
     }
 
+    /**
+     * @deprecated please use {@link #getWindowPixelHeight(Context)} instead
+     */
+    @Deprecated
     public static int getDisplayPixelHeight(Context context) {
-        Point size = getDisplayPixelSize(context);
-        return (size.y);
+        return getWindowSize(context).height();
     }
 
+    /**
+     * Calculates the width of the application's window
+     * @param context
+     * @return the width of the window
+     */
+    public static int getWindowPixelWidth(@NonNull Context context) {
+        return getWindowSize(context).width();
+    }
+
+    /**
+     * Calculates the height of the application's window
+     * @param context
+     * @return the height of the window
+     */
+    public static int getWindowPixelHeight(@NonNull Context context) {
+        return getWindowSize(context).height();
+    }
+
+    public static Rect getWindowSize(Context context) {
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            return wm.getCurrentWindowMetrics().getBounds();
+        } else {
+            Display display = wm.getDefaultDisplay();
+            Rect rect = new Rect();
+            display.getRectSize(rect);
+            return rect;
+        }
+    }
+
+    /**
+     * @return the width of the device's screen
+     */
     public static int getDisplayPixelWidth() {
         return Resources.getSystem().getDisplayMetrics().widthPixels;
     }
