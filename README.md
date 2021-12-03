@@ -17,7 +17,7 @@ dependencies {
 
 ## Publishing a new version
 
-In the following cases, CircleCI will publish a new version with the following format to our remote Maven repo:
+In the following cases, the CI will publish a new version with the following format to our remote Maven repo:
 
 * For each commit in an open PR: `<PR-number>-<commit full SHA1>`
 * Each time a PR is merged to `trunk`: `trunk-<commit full SHA1>`
