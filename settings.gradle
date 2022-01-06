@@ -5,11 +5,15 @@ pluginManagement {
     plugins {
         id "org.jetbrains.kotlin.android" version gradle.ext.kotlinVersion
         id "com.android.library" version gradle.ext.agpVersion
-        id "com.automattic.android.publish-to-s3" version "0.7.0"
+        id "com.automattic.android.publish-to-s3" version "test-different-s3-url"
     }
     repositories {
         maven {
-            url 'https://a8c-libs.s3.amazonaws.com/android' 
+            url 's3://a8c-libs.s3.amazonaws.com/android'
+            credentials(AwsCredentials) {
+                accessKey System.env.AWS_ACCESS_KEY
+                secretKey System.env.AWS_SECRET_KEY
+            }
             content {
                 includeGroup "com.automattic.android"
                 includeGroup "com.automattic.android.publish-to-s3"
