@@ -18,8 +18,8 @@ steps:
       cp gradle.properties-example gradle.properties
       ./gradlew lint checkstyle
     artifact_paths:
-      - "**/build/reports/lint-results.*"
-      - "**/build/reports/checkstyle/checkstyle.*"
+#      - "**/build/reports/lint-results.*"
+#      - "**/build/reports/checkstyle/checkstyle.*"
 
   - label: "Test"
     key: "test"
