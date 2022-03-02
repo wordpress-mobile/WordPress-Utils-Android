@@ -50,11 +50,6 @@ public class DeviceUtils {
      */
     public boolean hasCamera(Context context) {
         final PackageManager pm = context.getPackageManager();
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            return pm.hasSystemFeature(PackageManager.FEATURE_CAMERA)
-                   || pm.hasSystemFeature("android.hardware.camera.front");
-        }
-
         return pm.hasSystemFeature("android.hardware.camera.any");
     }
 
@@ -141,14 +136,7 @@ public class DeviceUtils {
 
     private static long availableSpaceAtFilePath(File path) {
         StatFs stat = new StatFs(path.getPath());
-        long bytesAvailable;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            return stat.getBlockSizeLong() * stat.getAvailableBlocksLong();
-        } else {
-            //noinspection deprecation - Deprecated calls properly handled
-            bytesAvailable = (long) stat.getBlockSize() * (long) stat.getAvailableBlocks();
-        }
-        return bytesAvailable;
+        return stat.getBlockSizeLong() * stat.getAvailableBlocksLong();
     }
 
     private static String formatSize(long size) {
