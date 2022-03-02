@@ -17,7 +17,7 @@ public class EmoticonsUtils {
     public static final SparseArray<String> WP_SMILIES_CODE_POINT_TO_TEXT;
 
     static {
-        Map<String, String> smilies = new HashMap<String, String>();
+        Map<String, String> smilies = new HashMap<>();
         smilies.put("icon_mrgreen.gif", "\uD83D\uDE00");
         smilies.put("icon_neutral.gif", "\uD83D\uDE14");
         smilies.put("icon_twisted.gif", "\uD83D\uDE16");
@@ -43,7 +43,7 @@ public class EmoticonsUtils {
 
         WP_SMILIES = Collections.unmodifiableMap(smilies);
 
-        WP_SMILIES_CODE_POINT_TO_TEXT = new SparseArray<String>(20);
+        WP_SMILIES_CODE_POINT_TO_TEXT = new SparseArray<>(20);
         WP_SMILIES_CODE_POINT_TO_TEXT.put(10145, ":arrow:");
         WP_SMILIES_CODE_POINT_TO_TEXT.put(128161, ":idea:");
         WP_SMILIES_CODE_POINT_TO_TEXT.put(128512, ":mrgreen:");
