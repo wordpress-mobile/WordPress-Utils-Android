@@ -1,12 +1,9 @@
 package org.wordpress.android.util;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Build;
-import android.os.Build.VERSION_CODES;
 import android.provider.Settings;
 
 /**
@@ -71,16 +68,11 @@ public class NetworkUtils {
     /**
      * returns true if airplane mode has been enabled
      */
-    @TargetApi(VERSION_CODES.JELLY_BEAN_MR1)
     @SuppressWarnings("deprecation")
     public static boolean isAirplaneModeOn(Context context) {
         // prior to JellyBean 4.2 this was Settings.System.AIRPLANE_MODE_ON, JellyBean 4.2
         // moved it to Settings.Global
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            return Settings.System.getInt(context.getContentResolver(), Settings.System.AIRPLANE_MODE_ON, 0) != 0;
-        } else {
-            return Settings.Global.getInt(context.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0) != 0;
-        }
+        return Settings.Global.getInt(context.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0) != 0;
     }
 
     /**

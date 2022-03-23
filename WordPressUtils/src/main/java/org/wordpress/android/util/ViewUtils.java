@@ -1,11 +1,9 @@
 package org.wordpress.android.util;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Outline;
-import android.os.Build;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 
@@ -20,16 +18,11 @@ public class ViewUtils {
     /**
      * Generate a value suitable for use in {@link View#setId(int)}.
      * This value will not collide with ID values generated at build time by aapt for R.id.
-     * Uses the native implementation if API 17 or above, otherwise uses a copied implementation.
      *
      * @return a generated ID value
      */
     public static int generateViewId() {
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            return View.generateViewId();
-        } else {
-            return copiedGenerateViewId();
-        }
+        return View.generateViewId();
     }
 
     private static final AtomicInteger NEXT_GENERATED_ID = new AtomicInteger(1);
@@ -64,18 +57,15 @@ public class ViewUtils {
     }
 
     /**
-     * adds an inset circular shadow outline the passed view (Lollipop+ only) - note that
+     * adds an inset circular shadow outline the passed view - note that
      * the view should have its elevation set prior to calling this
      */
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public static void addCircularShadowOutline(@NonNull View view) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            view.setOutlineProvider(new ViewOutlineProvider() {
-                @Override
-                public void getOutline(View view, Outline outline) {
-                    outline.setOval(0, 0, view.getWidth(), view.getHeight());
-                }
-            });
-        }
+        view.setOutlineProvider(new ViewOutlineProvider() {
+            @Override
+            public void getOutline(View view, Outline outline) {
+                outline.setOval(0, 0, view.getWidth(), view.getHeight());
+            }
+        });
     }
 }

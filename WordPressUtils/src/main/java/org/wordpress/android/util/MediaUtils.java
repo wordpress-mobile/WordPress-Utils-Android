@@ -1,13 +1,11 @@
 package org.wordpress.android.util;
 
-import android.annotation.TargetApi;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
@@ -451,12 +449,9 @@ public class MediaUtils {
         return null;
     }
 
-    @TargetApi(Build.VERSION_CODES.KITKAT)
     private static String getDocumentProviderPathKitkatOrHigher(final Context context, final Uri uri) {
-        final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
-
         // DocumentProvider
-        if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {
+        if (DocumentsContract.isDocumentUri(context, uri)) {
             // ExternalStorageProvider
             if (isExternalStorageDocument(uri)) {
                 final String docId = DocumentsContract.getDocumentId(uri);
