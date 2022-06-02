@@ -27,38 +27,6 @@ public class DisplayUtils {
     }
 
     /**
-     * Calculates the size of the application's window
-     * @param context
-     * @return Point with the window's dimenstions
-     * 
-     * @deprecated please use {@link #getWindowSize(Context)}
-     */
-    @Deprecated
-    public static Point getDisplayPixelSize(Context context) {
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        Display display = wm.getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        return size;
-    }
-    
-    /**
-     * @deprecated please use {@link #getWindowPixelWidth(Context)} instead
-     */
-    @Deprecated
-    public static int getDisplayPixelWidth(Context context) {
-        return getWindowSize(context).width();
-    }
-
-    /**
-     * @deprecated please use {@link #getWindowPixelHeight(Context)} instead
-     */
-    @Deprecated
-    public static int getDisplayPixelHeight(Context context) {
-        return getWindowSize(context).height();
-    }
-
-    /**
      * Calculates the width of the application's window
      * @param context
      * @return the width of the window
