@@ -31,6 +31,8 @@ public class MediaFile {
     protected boolean mFeaturedInPost;
     protected String mFileURL = null; // url of the file to download
     protected String mThumbnailURL = null; // url of the thumbnail to download
+    protected String mFileLargeURL = null; // large url to download
+    protected String mFileMediumURL = null; // medium url to download
     private String mBlogId;
     private long mDateCreatedGmt;
     private String mUploadState = null;
@@ -109,6 +111,8 @@ public class MediaFile {
         this.mFeaturedInPost = mediaFile.mFeaturedInPost;
         this.mFileURL = mediaFile.mFileURL;
         this.mThumbnailURL = mediaFile.mThumbnailURL;
+        this.mFileLargeURL = mediaFile.mFileLargeURL;
+        this.mFileMediumURL = mediaFile.mFileMediumURL;
         this.mBlogId = mediaFile.mBlogId;
         this.mDateCreatedGmt = mediaFile.mDateCreatedGmt;
         this.mUploadState = mediaFile.mUploadState;
@@ -201,6 +205,22 @@ public class MediaFile {
 
     public void setThumbnailURL(String thumbnailURL) {
         this.mThumbnailURL = thumbnailURL;
+    }
+
+    public String getFileUrlLargeSize() {
+        return mFileLargeURL;
+    }
+
+    public void setFileUrlLargeSize(String largeURL) {
+        this.mFileLargeURL = largeURL;
+    }
+
+    public String getFileUrlMediumSize() {
+        return mFileMediumURL;
+    }
+
+    public void setFileUrlMediumSize(String mediumURL) {
+        this.mFileMediumURL = mediumURL;
     }
 
     public boolean isVerticalAlignmentOnTop() {
