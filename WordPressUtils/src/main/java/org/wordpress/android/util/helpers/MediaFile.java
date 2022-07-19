@@ -381,4 +381,17 @@ public class MediaFile {
         String attachmentPageUrl = UrlUtils.appendUrlParameter(siteUrl, "p", mMediaId);
         return attachmentPageUrl;
     }
+
+    public String getOptimalFileURL() {
+        String mediaURL;
+        if (!TextUtils.isEmpty(getFileUrlLargeSize())) {
+            mediaURL = getFileUrlLargeSize();
+        } else if (!TextUtils.isEmpty(getFileUrlMediumSize())) {
+            mediaURL = getFileUrlMediumSize();
+        } else {
+            mediaURL = getFileURL();
+        }
+
+        return mediaURL;
+    }
 }
