@@ -384,12 +384,12 @@ public class MediaFile {
 
     public String getOptimalFileURL() {
         String mediaURL;
-        if (!TextUtils.isEmpty(getFileUrlLargeSize())) {
-            mediaURL = getFileUrlLargeSize();
-        } else if (!TextUtils.isEmpty(getFileUrlMediumSize())) {
-            mediaURL = getFileUrlMediumSize();
+        if (!TextUtils.isEmpty(mFileLargeURL)) {
+            mediaURL = mFileLargeURL;
+        } else if (!TextUtils.isEmpty(mFileMediumURL)) {
+            mediaURL = mFileMediumURL;
         } else {
-            mediaURL = getFileURL();
+            mediaURL = mFileURL;
         }
 
         return mediaURL;
