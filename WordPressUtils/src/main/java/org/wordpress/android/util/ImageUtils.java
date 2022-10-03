@@ -100,7 +100,7 @@ public class ImageUtils {
                             .query(curStream, new String[]{MediaStore.Images.Media.ORIENTATION}, null, null, null);
             if (cur != null) {
                 if (cur.moveToFirst()) {
-                    orientation = cur.getInt(cur.getColumnIndex(MediaStore.Images.Media.ORIENTATION));
+                    orientation = cur.getInt(cur.getColumnIndexOrThrow(MediaStore.Images.Media.ORIENTATION));
                 }
                 cur.close();
             }
