@@ -29,9 +29,3 @@ pluginManagement {
 }
 
 include ':WordPressUtils'
-
-gradle.ext {
-    minSdkVersion = 24
-    compileSdkVersion = 31
-    targetSdkVersion = 31
-}
