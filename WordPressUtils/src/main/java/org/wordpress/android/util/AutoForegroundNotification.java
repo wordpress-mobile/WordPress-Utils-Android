@@ -46,7 +46,7 @@ public class AutoForegroundNotification {
                         context,
                         requestCode,
                         getResumeIntent(context),
-                        PendingIntent.FLAG_ONE_SHOT));
+                        PendingIntent.FLAG_IMMUTABLE));
     }
 
     public static Notification progress(Context context, String channelId, int progress, @StringRes int title,
