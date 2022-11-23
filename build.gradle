@@ -33,3 +33,7 @@ ext {
     compileSdkVersion = 31
     targetSdkVersion = 31
 }
+
+ext {
+    androidxCoreVersion = '1.5.0'
+}
