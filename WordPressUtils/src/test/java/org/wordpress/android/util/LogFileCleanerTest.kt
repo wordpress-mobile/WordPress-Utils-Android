@@ -5,6 +5,7 @@ import android.os.Build
 import androidx.test.core.app.ApplicationProvider
 import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -35,7 +36,7 @@ class LogFileCleanerTest {
             file.setLastModified(it * 10_000L)
         }
 
-        assert(testProvider.getLogFileDirectory().listFiles().count() == MAX_FILES)
+        assert(testProvider.getLogFileDirectory().listFiles()?.count() == MAX_FILES)
     }
 
     @After
@@ -62,12 +63,12 @@ class LogFileCleanerTest {
     fun testThatCleanerPreservesCorrectNumberOfFiles() {
         val numberOfFiles = Random.nextInt(MAX_FILES)
         LogFileCleaner(testProvider, numberOfFiles).clean()
-        assertEquals(numberOfFiles, testProvider.getLogFileDirectory().listFiles().count())
+        assertEquals(numberOfFiles, testProvider.getLogFileDirectory().listFiles()?.count())
     }
 
     @Test
     fun testThatCleanerErasesAllFilesIfGivenZero() {
         LogFileCleaner(testProvider, 0).clean()
-        assert(testProvider.getLogFileDirectory().listFiles().isEmpty())
+        assertTrue(testProvider.getLogFileDirectory().listFiles()?.isEmpty() ?: false)
     }
 }
