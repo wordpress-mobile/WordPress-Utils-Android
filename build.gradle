@@ -1,4 +1,8 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
+    id "com.android.library" apply false
+    id "org.jetbrains.kotlin.android" apply false
     id "com.automattic.android.fetchstyle"
 }
 
@@ -15,6 +19,11 @@ allprojects {
         checkstyle {
             toolVersion = '8.3'
             configFile file("${project.rootDir}/config/checkstyle.xml")
+        }
+    }
+    tasks.withType(KotlinCompile).all {
+        kotlinOptions {
+            allWarningsAsErrors = true
         }
     }
 }
