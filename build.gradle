@@ -42,7 +42,7 @@ ext {
     androidxCoreVersion = '1.5.0'
     androidxRecyclerViewVersion = '1.0.0'
     androidxSwipeRefreshLayoutVersion = '1.1.0'
-    commonsTextVersion = '1.1'
+    commonsTextVersion = '1.10.0'
     eventBusVersion = '3.3.1'
     materialVersion = '1.2.1'
     volleyVersion = '1.2.0'
