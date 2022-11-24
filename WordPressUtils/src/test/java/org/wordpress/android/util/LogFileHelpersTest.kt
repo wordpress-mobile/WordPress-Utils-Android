@@ -3,27 +3,21 @@ package org.wordpress.android.util
 import android.content.Context
 import android.os.Build
 import androidx.test.core.app.ApplicationProvider
-import java.io.File
-import java.util.UUID
 import org.junit.After
 import org.junit.Assert
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.wordpress.android.util.helpers.logfile.LogFileProvider
+import java.io.File
+import java.util.UUID
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [Build.VERSION_CODES.O_MR1])
 class LogFileHelpersTest {
-    private lateinit var testProvider: LogFileProvider
-
-    @Before
-    fun setup() {
-        val context: Context = ApplicationProvider.getApplicationContext()
-        testProvider = LogFileProvider.fromContext(context)
-    }
+    private val context: Context = ApplicationProvider.getApplicationContext()
+    private val testProvider = LogFileProvider.fromContext(context)
 
     @After
     fun tearDown() {

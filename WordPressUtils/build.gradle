@@ -4,8 +4,6 @@ plugins {
     id "com.automattic.android.publish-to-s3"
 }
 
-ext.kotlin_ktx_version = '1.5.0'
-
 repositories {
     google()
     mavenCentral()
@@ -13,26 +11,26 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.apache.commons:commons-text:1.1'
-    implementation 'com.android.volley:volley:1.2.0'
-    implementation 'com.google.android.material:material:1.2.1'
-    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
-    implementation 'org.greenrobot:eventbus:3.3.1'
+    implementation "org.apache.commons:commons-text:$commonsTextVersion"
+    implementation "com.android.volley:volley:$volleyVersion"
+    implementation "com.google.android.material:material:$materialVersion"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$androidxSwipeRefreshLayoutVersion"
+    implementation "androidx.recyclerview:recyclerview:$androidxRecyclerViewVersion"
+    implementation "org.greenrobot:eventbus:$eventBusVersion"
 
-    implementation "androidx.core:core-ktx:$kotlin_ktx_version"
+    implementation "androidx.core:core-ktx:$androidxCoreVersion"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$gradle.ext.kotlinVersion"
 
-    testImplementation 'junit:junit:4.12'
-    testImplementation 'org.assertj:assertj-core:3.11.1'
-    testImplementation "org.robolectric:robolectric:4.4"
-    testImplementation 'androidx.test:core:1.4.0'
+    testImplementation "junit:junit:$junitVersion"
+    testImplementation "org.assertj:assertj-core:$assertjVersion"
+    testImplementation "org.robolectric:robolectric:$robolectricVersion"
+    testImplementation "androidx.test:core:$androidxTestCoreVersion"
 
-    lintChecks 'org.wordpress:lint:1.1.0'
-    androidTestImplementation 'androidx.test:runner:1.4.0'
-    androidTestImplementation 'androidx.test:rules:1.4.0'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
+    lintChecks "org.wordpress:lint:$wordpressLintVersion"
+    androidTestImplementation "androidx.test:runner:$androidxTestCoreVersion"
+    androidTestImplementation "androidx.test:rules:$androidxTestCoreVersion"
+    androidTestImplementation "androidx.test.ext:junit:$jUnitExtVersion"
+    androidTestImplementation "com.android.support.test.uiautomator:uiautomator-v18:$uiAutomatorVersion"
 
 }
 
