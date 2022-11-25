@@ -18,14 +18,6 @@ pluginManagement {
         gradlePluginPortal()
         google()
     }
-    resolutionStrategy {
-        eachPlugin {
-            // TODO: Remove this as soon as fetchstyle starts supporting Plugin Marker Artifacts
-            if (requested.id.id == "com.automattic.android.fetchstyle") {
-                useModule("com.automattic.android:fetchstyle:1.1")
-            }
-        }
-    }
 }
 
 include ':WordPressUtils'
