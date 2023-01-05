@@ -299,8 +299,11 @@ public class AppLog {
     private static LogEntryList mLogEntries = new LogEntryList();
 
     private static void addEntry(T tag, LogLevel level, String text) {
+        // Create a new listener list to avoid ConcurrentModificationException
+        List<AppLog.AppLogListener> currentListeners = new ArrayList<>(mListeners);
+
         // Call our listeners if any
-        for (AppLogListener listener : mListeners) {
+        for (AppLogListener listener : currentListeners) {
             listener.onLog(tag, level, text);
         }
         // Record entry if enabled
