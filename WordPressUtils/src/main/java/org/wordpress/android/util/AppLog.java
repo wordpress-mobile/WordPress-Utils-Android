@@ -65,7 +65,8 @@ public class AppLog {
         DOMAIN_REGISTRATION,
         FEATURE_ANNOUNCEMENT,
         PREPUBLISHING_NUDGES,
-        MY_SITE_DASHBOARD
+        MY_SITE_DASHBOARD,
+        JETPACK_MIGRATION,
     }
 
     public static final String TAG = "WordPress";
