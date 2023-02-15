@@ -26,6 +26,7 @@ public class MediaFile {
     protected int mHeight;
     protected String mMimeType = "";
     protected String mVideoPressShortCode = null;
+    protected String mVideoPressGuid = null;
     protected boolean mFeatured = false;
     protected boolean mIsVideo = false;
     protected boolean mFeaturedInPost;
@@ -49,6 +50,7 @@ public class MediaFile {
         setAlt(MapUtils.getMapStr(resultMap, "alt"));
         setDescription(MapUtils.getMapStr(resultMap, "description"));
         setVideoPressShortCode(MapUtils.getMapStr(resultMap, VIDEOPRESS_SHORTCODE_ID));
+        setVideoPressGuid(MapUtils.getMapStr(resultMap, "videopress_guid"));
 
         // get the file name from the link
         String link = MapUtils.getMapStr(resultMap, "link");
@@ -117,6 +119,7 @@ public class MediaFile {
         this.mDateCreatedGmt = mediaFile.mDateCreatedGmt;
         this.mUploadState = mediaFile.mUploadState;
         this.mMediaId = mediaFile.mMediaId;
+        this.mVideoPressGuid = mediaFile.mVideoPressGuid;
     }
 
     public int getId() {
@@ -269,6 +272,14 @@ public class MediaFile {
 
     public void setVideoPressShortCode(String videoPressShortCode) {
         this.mVideoPressShortCode = videoPressShortCode;
+    }
+
+    public String getVideoPressGuid() {
+        return mVideoPressGuid;
+    }
+
+    public void setVideoPressGuid(String videoPressGUID) {
+        this.mVideoPressGuid = videoPressGUID;
     }
 
     public int getHorizontalAlignment() {
