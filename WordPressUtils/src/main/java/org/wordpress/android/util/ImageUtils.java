@@ -647,7 +647,11 @@ public class ImageUtils {
             // I've see this kind of error on one of my testing device
             AppLog.e(AppLog.T.MEDIA, "The passed video path is invalid: " + videoPath);
         } finally {
-            mediaMetadataRetriever.release();
+            try {
+                mediaMetadataRetriever.release();
+            } catch (Exception e) {
+                AppLog.e(AppLog.T.MEDIA, "The passed video path is invalid: " + videoPath);
+            }
         }
 
         if (bitmap == null) {
