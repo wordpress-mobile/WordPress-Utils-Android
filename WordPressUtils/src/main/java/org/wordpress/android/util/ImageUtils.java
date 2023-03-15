@@ -650,7 +650,7 @@ public class ImageUtils {
             try {
                 mediaMetadataRetriever.release();
             } catch (Exception e) {
-                AppLog.e(AppLog.T.MEDIA, "The passed video path is invalid: " + videoPath);
+                AppLog.e(AppLog.T.MEDIA, "Failed to release mediaMetadataRetriever.", e);
             }
         }
 
