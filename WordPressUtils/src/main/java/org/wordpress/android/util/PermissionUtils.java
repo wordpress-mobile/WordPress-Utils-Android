@@ -1,9 +1,11 @@
 package org.wordpress.android.util;
 
+import android.Manifest;
 import android.Manifest.permission;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.os.Build;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -77,28 +79,42 @@ public class PermissionUtils {
     }
 
     public static boolean checkAndRequestCameraAndStoragePermissions(Fragment fragment, int requestCode) {
-        return checkAndRequestPermissions(fragment, requestCode, new String[]{
-                permission.WRITE_EXTERNAL_STORAGE,
-                permission.CAMERA
-        });
+        String[] permissions;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            permissions = new String[]{Manifest.permission.CAMERA};
+        } else {
+            permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        }
+        return checkAndRequestPermissions(fragment, requestCode, permissions);
     }
 
     public static boolean checkAndRequestCameraAndStoragePermissions(Activity activity, int requestCode) {
-        return checkAndRequestPermissions(activity, requestCode, new String[]{
-                permission.WRITE_EXTERNAL_STORAGE,
-                permission.CAMERA
-        });
+        String[] permissions;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            permissions = new String[]{Manifest.permission.CAMERA};
+        } else {
+            permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        }
+        return checkAndRequestPermissions(activity, requestCode, permissions);
     }
 
     public static boolean checkAndRequestStoragePermission(Activity activity, int requestCode) {
-        return checkAndRequestPermissions(activity, requestCode, new String[]{
-                permission.WRITE_EXTERNAL_STORAGE
-        });
+        String[] permissions;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            permissions = new String[]{Manifest.permission.CAMERA};
+        } else {
+            permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        }
+        return checkAndRequestPermissions(activity, requestCode, permissions);
     }
 
     public static boolean checkAndRequestStoragePermission(Fragment fragment, int requestCode) {
-        return checkAndRequestPermissions(fragment, requestCode, new String[]{
-                permission.WRITE_EXTERNAL_STORAGE
-        });
+        String[] permissions;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            permissions = new String[]{Manifest.permission.CAMERA};
+        } else {
+            permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        }
+        return checkAndRequestPermissions(fragment, requestCode, permissions);
     }
 }
