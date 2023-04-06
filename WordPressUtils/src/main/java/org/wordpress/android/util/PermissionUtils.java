@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.os.Build.VERSION_CODES;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -73,9 +74,17 @@ public class PermissionUtils {
 
     public static boolean checkCameraAndStoragePermissions(Activity activity) {
         return checkPermissions(activity,
-                                new String[]{
-                                        permission.WRITE_EXTERNAL_STORAGE,
-                                        permission.CAMERA});
+                new String[]{
+                        permission.WRITE_EXTERNAL_STORAGE,
+                        permission.CAMERA});
+    }
+
+    public static boolean checkNotificationsPermission(Activity activity) {
+        if (Build.VERSION.SDK_INT >= VERSION_CODES.TIRAMISU) {
+            return checkPermissions(activity, new String[]{permission.POST_NOTIFICATIONS});
+        } else {
+            return true;
+        }
     }
 
     public static boolean checkAndRequestCameraAndStoragePermissions(Fragment fragment, int requestCode) {
