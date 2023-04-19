@@ -63,13 +63,22 @@ public class PermissionUtils {
      *
      * @return true if all permissions are granted
      */
-    public static boolean checkPermissions(Activity activity, String[] permissionList) {
+    public static boolean checkPermissions(Context context, String[] permissionList) {
         for (String permission : permissionList) {
-            if (ContextCompat.checkSelfPermission(activity, permission) != PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
                 return false;
             }
         }
         return true;
+    }
+
+    /**
+     * Check for permissions without requesting them
+     *
+     * @return true if all permissions are granted
+     */
+    public static boolean checkPermissions(Activity activity, String[] permissionList) {
+        return checkPermissions((Context) activity, permissionList);
     }
 
     public static boolean checkCameraAndStoragePermissions(Activity activity) {
