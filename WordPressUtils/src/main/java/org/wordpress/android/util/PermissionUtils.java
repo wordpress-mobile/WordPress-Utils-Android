@@ -1,12 +1,10 @@
 package org.wordpress.android.util;
 
-import android.Manifest;
 import android.Manifest.permission;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.os.Build.VERSION_CODES;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -81,15 +79,16 @@ public class PermissionUtils {
         return checkPermissions((Context) activity, permissionList);
     }
 
+    public static boolean checkCameraAndStoragePermissions(Context context) {
+        return checkPermissions(context, getCameraAndStoragePermissions());
+    }
+
     public static boolean checkCameraAndStoragePermissions(Activity activity) {
-        return checkPermissions(activity,
-                new String[]{
-                        permission.WRITE_EXTERNAL_STORAGE,
-                        permission.CAMERA});
+        return checkPermissions(activity, getCameraAndStoragePermissions());
     }
 
     public static boolean checkNotificationsPermission(Activity activity) {
-        if (Build.VERSION.SDK_INT >= VERSION_CODES.TIRAMISU) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             return checkPermissions(activity, new String[]{permission.POST_NOTIFICATIONS});
         } else {
             return true;
@@ -97,42 +96,38 @@ public class PermissionUtils {
     }
 
     public static boolean checkAndRequestCameraAndStoragePermissions(Fragment fragment, int requestCode) {
-        String[] permissions;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            permissions = new String[]{Manifest.permission.CAMERA};
-        } else {
-            permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-        }
-        return checkAndRequestPermissions(fragment, requestCode, permissions);
+        return checkAndRequestPermissions(fragment, requestCode, getCameraAndStoragePermissions());
     }
 
     public static boolean checkAndRequestCameraAndStoragePermissions(Activity activity, int requestCode) {
-        String[] permissions;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            permissions = new String[]{Manifest.permission.CAMERA};
-        } else {
-            permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-        }
-        return checkAndRequestPermissions(activity, requestCode, permissions);
+        return checkAndRequestPermissions(activity, requestCode, getCameraAndStoragePermissions());
     }
 
     public static boolean checkAndRequestStoragePermission(Activity activity, int requestCode) {
-        String[] permissions;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            permissions = new String[]{Manifest.permission.CAMERA};
-        } else {
-            permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-        }
-        return checkAndRequestPermissions(activity, requestCode, permissions);
+        return checkAndRequestPermissions(activity, requestCode, getStoragePermissions());
     }
 
     public static boolean checkAndRequestStoragePermission(Fragment fragment, int requestCode) {
-        String[] permissions;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            permissions = new String[]{Manifest.permission.CAMERA};
+        return checkAndRequestPermissions(fragment, requestCode, getStoragePermissions());
+    }
+
+    public static String[] getCameraAndStoragePermissions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            return new String[]{permission.CAMERA, permission.READ_MEDIA_IMAGES, permission.READ_MEDIA_VIDEO};
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            return new String[]{permission.CAMERA, permission.READ_EXTERNAL_STORAGE};
         } else {
-            permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+            return new String[]{permission.CAMERA, permission.WRITE_EXTERNAL_STORAGE, permission.READ_EXTERNAL_STORAGE};
         }
-        return checkAndRequestPermissions(fragment, requestCode, permissions);
+    }
+
+    private static String[] getStoragePermissions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            return new String[]{permission.READ_MEDIA_IMAGES, permission.READ_MEDIA_VIDEO};
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            return new String[]{permission.READ_EXTERNAL_STORAGE};
+        } else {
+            return new String[]{permission.READ_EXTERNAL_STORAGE, permission.WRITE_EXTERNAL_STORAGE};
+        }
     }
 }
