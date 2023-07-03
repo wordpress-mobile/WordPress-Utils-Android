@@ -27,7 +27,7 @@ steps:
     plugins: *common_plugins
     command: |
       cp gradle.properties-example gradle.properties
-      ./gradlew test
+      ./gradlew testRelease
 
   - label: "Build and upload to S3"
     depends_on:
