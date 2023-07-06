@@ -19,7 +19,6 @@ dependencies {
     implementation "org.greenrobot:eventbus:$eventBusVersion"
 
     implementation "androidx.core:core-ktx:$androidxCoreVersion"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$gradle.ext.kotlinVersion"
 
     testImplementation "junit:junit:$junitVersion"
     testImplementation "org.assertj:assertj-core:$assertjVersion"
@@ -27,11 +26,10 @@ dependencies {
     testImplementation "androidx.test:core:$androidxTestCoreVersion"
 
     lintChecks "org.wordpress:lint:$wordpressLintVersion"
+
     androidTestImplementation "androidx.test:runner:$androidxTestCoreVersion"
     androidTestImplementation "androidx.test:rules:$androidxTestCoreVersion"
     androidTestImplementation "androidx.test.ext:junit:$jUnitExtVersion"
-    androidTestImplementation "com.android.support.test.uiautomator:uiautomator-v18:$uiAutomatorVersion"
-
 }
 
 android {

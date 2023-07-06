@@ -1,1 +1,6 @@
+# WordPress-Utils-Android properties.
+
 android.useAndroidX=true
+android.enableJetifier=false
+
+android.nonTransitiveRClass=true
