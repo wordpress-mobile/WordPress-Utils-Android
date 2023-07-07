@@ -33,6 +33,8 @@ dependencies {
 }
 
 android {
+    namespace "org.wordpress.android.util"
+
     useLibrary 'org.apache.http.legacy'
 
     compileSdkVersion rootProject.compileSdkVersion
