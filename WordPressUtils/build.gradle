@@ -33,6 +33,8 @@ dependencies {
 }
 
 android {
+    namespace "org.wordpress.android.util"
+
     useLibrary 'org.apache.http.legacy'
 
     compileSdkVersion rootProject.compileSdkVersion
@@ -52,6 +54,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    buildFeatures {
+        buildConfig true
+    }
 }
 
 project.afterEvaluate {
@@ -62,7 +67,6 @@ project.afterEvaluate {
 
                 groupId "org.wordpress"
                 artifactId "utils"
-                artifact tasks.named("androidSourcesJar")
                 // version is set by 'publish-to-s3' plugin
             }
         }
