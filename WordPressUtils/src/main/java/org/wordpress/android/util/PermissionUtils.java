@@ -2,9 +2,11 @@ package org.wordpress.android.util;
 
 import android.Manifest.permission;
 import android.app.Activity;
+import android.app.DownloadManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.os.Build.VERSION_CODES;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -107,8 +109,8 @@ public class PermissionUtils {
         return checkAndRequestPermissions(activity, requestCode, getStoragePermissions());
     }
 
-    public static boolean checkAndRequestStoragePermission(Fragment fragment, int requestCode) {
-        return checkAndRequestPermissions(fragment, requestCode, getStoragePermissions());
+    public static boolean checkAndRequestFileDownloadPermission(Fragment fragment, int requestCode) {
+        return checkAndRequestPermissions(fragment, requestCode, getFileDownloadPermission());
     }
 
     public static String[] getCameraAndStoragePermissions() {
@@ -118,6 +120,19 @@ public class PermissionUtils {
             return new String[]{permission.CAMERA, permission.READ_EXTERNAL_STORAGE};
         } else {
             return new String[]{permission.CAMERA, permission.WRITE_EXTERNAL_STORAGE, permission.READ_EXTERNAL_STORAGE};
+        }
+    }
+
+    /**
+     * Starting from Android Q (SDK 29), the WRITE_EXTERNAL_STORAGE permission is not needed anymore for downloading
+     * files when using setDestinationInExternalPublicDir. Reference:
+     * <a href="https://developer.android.com/reference/android/app/DownloadManager.Request#setDestinationInExternalPublicDir(java.lang.String,%20java.lang.String)">...</a>
+     */
+    private static String[] getFileDownloadPermission() {
+        if (Build.VERSION.SDK_INT >= VERSION_CODES.Q) {
+            return new String[]{};
+        } else {
+            return new String[]{permission.READ_EXTERNAL_STORAGE, permission.WRITE_EXTERNAL_STORAGE};
         }
     }
 
