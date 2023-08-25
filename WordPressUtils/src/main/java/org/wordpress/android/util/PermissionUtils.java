@@ -105,10 +105,6 @@ public class PermissionUtils {
         return checkAndRequestPermissions(activity, requestCode, getCameraAndStoragePermissions());
     }
 
-    public static boolean checkAndRequestStoragePermission(Activity activity, int requestCode) {
-        return checkAndRequestPermissions(activity, requestCode, getStoragePermissions());
-    }
-
     public static boolean checkAndRequestFileDownloadPermission(Fragment fragment, int requestCode) {
         return checkAndRequestPermissions(fragment, requestCode, getFileDownloadPermission());
     }
@@ -131,16 +127,6 @@ public class PermissionUtils {
     private static String[] getFileDownloadPermission() {
         if (Build.VERSION.SDK_INT >= VERSION_CODES.Q) {
             return new String[]{};
-        } else {
-            return new String[]{permission.READ_EXTERNAL_STORAGE, permission.WRITE_EXTERNAL_STORAGE};
-        }
-    }
-
-    private static String[] getStoragePermissions() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            return new String[]{permission.READ_MEDIA_IMAGES, permission.READ_MEDIA_VIDEO};
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            return new String[]{permission.READ_EXTERNAL_STORAGE};
         } else {
             return new String[]{permission.READ_EXTERNAL_STORAGE, permission.WRITE_EXTERNAL_STORAGE};
         }
