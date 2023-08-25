@@ -113,7 +113,7 @@ public class PermissionUtils {
 
     public static String[] getCameraAndStoragePermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            return new String[]{permission.CAMERA, permission.READ_MEDIA_IMAGES, permission.READ_MEDIA_VIDEO};
+            return new String[]{permission.CAMERA};
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             return new String[]{permission.CAMERA, permission.READ_EXTERNAL_STORAGE};
         } else {
