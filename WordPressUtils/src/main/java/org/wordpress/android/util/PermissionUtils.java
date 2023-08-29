@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.os.Build.VERSION_CODES;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -123,7 +122,7 @@ public class PermissionUtils {
      * files when using DownloadManager.Request#setDestinationInExternalPublicDir.
      */
     private static String[] getFileDownloadPermission() {
-        if (Build.VERSION.SDK_INT >= VERSION_CODES.Q) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             return new String[]{};
         } else {
             return new String[]{permission.READ_EXTERNAL_STORAGE, permission.WRITE_EXTERNAL_STORAGE};
