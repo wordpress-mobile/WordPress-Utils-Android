@@ -2,7 +2,6 @@ package org.wordpress.android.util;
 
 import android.content.ContentUris;
 import android.content.Context;
-import android.content.CursorLoader;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -104,19 +103,6 @@ public class MediaUtils {
                || state.equalsIgnoreCase("uploading")
                || state.equalsIgnoreCase("retry")
                || state.equalsIgnoreCase("failed");
-    }
-
-    public static Uri getLastRecordedVideoUri(Context appContext) {
-        String[] proj = {MediaStore.Video.Media._ID};
-        Uri contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
-        String sortOrder = MediaStore.Video.VideoColumns.DATE_TAKEN + " DESC";
-        CursorLoader loader = new CursorLoader(appContext, contentUri, proj, null, null, sortOrder);
-        Cursor cursor = loader.loadInBackground();
-        cursor.moveToFirst();
-        long value = cursor.getLong(0);
-        SqlUtils.closeCursor(cursor);
-
-        return Uri.parse(contentUri.toString() + "/" + value);
     }
 
     /**
