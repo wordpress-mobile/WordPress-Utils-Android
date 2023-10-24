@@ -35,7 +35,7 @@ ext {
 
 ext {
     // libs
-    wordpressLintVersion = '1.1.0'
+    wordpressLintVersion = '2.0.0'
 
     // main
     androidxCoreVersion = '1.5.0'
