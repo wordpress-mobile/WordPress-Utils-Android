@@ -139,6 +139,26 @@ public class StringUtils {
         return md5;
     }
 
+    public static BigInteger getSha256IntHash(String input) {
+        try {
+            MessageDigest sha256 = MessageDigest.getInstance("SHA-256");
+            byte[] messageDigest = sha256.digest(input.getBytes());
+            return new BigInteger(1, messageDigest);
+        } catch (NoSuchAlgorithmException e) {
+            AppLog.e(T.UTILS, e);
+            return null;
+        }
+    }
+
+    public static String getSha256Hash(String input) {
+        BigInteger number = getSha256IntHash(input);
+        String sha256 = number.toString(16);
+        while (sha256.length() < 64) {
+            sha256 = "0" + sha256;
+        }
+        return sha256;
+    }
+
     /*
      * nbradbury - adapted from Html.escapeHtml(), which was added in API Level 16
      * TODO: not thoroughly tested yet, so marked as private - not sure I like the way
