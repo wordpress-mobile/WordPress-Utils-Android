@@ -68,9 +68,9 @@ public class GravatarUtils {
 
     public static String gravatarFromEmail(final String email, int size, DefaultImage defaultImage) {
         return "http://gravatar.com/avatar/"
-               + StringUtils.getMd5Hash(StringUtils.notNullStr(email))
+               + StringUtils.getSha256Hash(StringUtils.notNullStr(email))
                + "?d=" + defaultImage.toString()
-               + "&size=" + Integer.toString(size);
+               + "&size=" + size;
     }
 
     public static String blavatarFromUrl(final String url, int size) {
@@ -79,8 +79,8 @@ public class GravatarUtils {
 
     public static String blavatarFromUrl(final String url, int size, DefaultImage defaultImage) {
         return "http://gravatar.com/blavatar/"
-               + StringUtils.getMd5Hash(UrlUtils.getHost(url))
+               + StringUtils.getSha256Hash(UrlUtils.getHost(url))
                + "?d=" + defaultImage.toString()
-               + "&size=" + Integer.toString(size);
+               + "&size=" + size;
     }
 }
