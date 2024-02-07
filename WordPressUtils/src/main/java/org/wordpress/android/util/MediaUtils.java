@@ -43,7 +43,7 @@ public class MediaUtils {
         }
         url = url.toLowerCase(Locale.ROOT);
         return url.endsWith(".png") || url.endsWith(".jpg") || url.endsWith(".jpeg") || url.endsWith(".gif")
-               || url.endsWith(".webp");
+               || url.endsWith(".webp") || url.endsWith(".heic") || url.endsWith(".heif");
     }
 
     public static boolean isDocument(String url) {
