@@ -140,7 +140,7 @@ public class PhotonUtils {
 
         int beginIndex = schemePos + 3;
         if (beginIndex < 0 || beginIndex > imageUrl.length()) {
-            // Fallback to original URL if the beginIndex is invalid
+            // Fallback to original URL if the beginIndex is invalid to avoid `StringIndexOutOfBoundsException`
             // Ref: https://github.com/wordpress-mobile/WordPress-Android/issues/18626
             return imageUrl;
         }

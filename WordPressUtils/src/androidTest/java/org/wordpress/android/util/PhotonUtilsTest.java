@@ -103,4 +103,12 @@ public class PhotonUtilsTest {
 
         assertThat(photonUrl, equalTo("https://i0.wp.com/mysite.com/test.jpg?strip=info&quality=65&resize=2,1&ssl=1"));
     }
+
+    @Test
+    public void getPhotonImageUrlWithErroneousSchemePosition() {
+        String imageUrl = "mysite.com/test.jpg#http://another.com";
+        String photonUrl = PhotonUtils.getPhotonImageUrl(imageUrl, 1, 1);
+
+        assertThat(photonUrl, equalTo("mysite.com/test.jpg"));
+    }
 }
