@@ -138,6 +138,12 @@ public class PhotonUtils {
             query += "&ssl=1";
         }
 
-        return "https://i0.wp.com/" + imageUrl.substring(schemePos + 3, imageUrl.length()) + query;
+        int beginIndex = schemePos + 3;
+        if (beginIndex < 0 || beginIndex > imageUrl.length()) {
+            // Fallback to original URL if the beginIndex is invalid
+            // Ref: https://github.com/wordpress-mobile/WordPress-Android/issues/18626
+            return imageUrl;
+        }
+        return "https://i0.wp.com/" + imageUrl.substring(beginIndex) + query;
     }
 }
