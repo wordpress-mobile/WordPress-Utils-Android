@@ -109,6 +109,6 @@ public class PhotonUtilsTest {
         String imageUrl = "mysite.com/test.jpg#http://another.com";
         String photonUrl = PhotonUtils.getPhotonImageUrl(imageUrl, 1, 1);
 
-        assertThat(photonUrl, equalTo("mysite.com/test.jpg"));
+        assertThat(photonUrl, equalTo(imageUrl));
     }
 }

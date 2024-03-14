@@ -52,6 +52,8 @@ public class PhotonUtils {
             return "";
         }
 
+        String originalUrl = imageUrl;
+
         // make sure it's valid
         int schemePos = imageUrl.indexOf("://");
         if (schemePos == -1) {
@@ -142,7 +144,7 @@ public class PhotonUtils {
         if (beginIndex < 0 || beginIndex > imageUrl.length()) {
             // Fallback to original URL if the beginIndex is invalid to avoid `StringIndexOutOfBoundsException`
             // Ref: https://github.com/wordpress-mobile/WordPress-Android/issues/18626
-            return imageUrl;
+            return originalUrl;
         }
         return "https://i0.wp.com/" + imageUrl.substring(beginIndex) + query;
     }
