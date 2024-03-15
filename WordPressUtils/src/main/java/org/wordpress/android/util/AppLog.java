@@ -305,7 +305,12 @@ public class AppLog {
 
         // Call our listeners if any
         for (AppLogListener listener : currentListeners) {
-            listener.onLog(tag, level, text);
+            if (listener != null) {
+                listener.onLog(tag, level, text);
+            } else {
+                // Log a warning
+                w(T.UTILS, "AppLogListener is null when attempting to log.");
+            }
         }
         // Record entry if enabled
         if (mEnableRecording) {
