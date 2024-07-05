@@ -1,3 +1,6 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/buildkite/pipeline-schema/main/schema.json
+---
+
 common_params:
   # Common plugin settings to use with the `plugins` key.
   - &common_plugins
