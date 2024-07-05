@@ -4,3 +4,6 @@ android.useAndroidX=true
 android.enableJetifier=false
 
 android.nonTransitiveRClass=true
+
+# Dependency Analysis Plugin
+dependency.analysis.android.ignored.variants=release
