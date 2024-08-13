@@ -29,7 +29,6 @@ dependencies {
 
     androidTestImplementation "androidx.test:runner:$androidxTestCoreVersion"
     androidTestImplementation "androidx.test:rules:$androidxTestCoreVersion"
-    androidTestImplementation "androidx.test.ext:junit:$jUnitExtVersion"
 }
 
 android {

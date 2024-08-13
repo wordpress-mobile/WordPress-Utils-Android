@@ -53,7 +53,4 @@ ext {
     assertjVersion = '3.11.1'
     junitVersion = '4.12'
     robolectricVersion = '4.9'
-
-    // android test
-    jUnitExtVersion = '1.1.3'
 }
