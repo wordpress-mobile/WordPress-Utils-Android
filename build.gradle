@@ -46,7 +46,6 @@ ext {
     commonsTextVersion = '1.10.0'
     eventBusVersion = '3.3.1'
     materialVersion = '1.2.1'
-    volleyVersion = '1.2.0'
 
     // test
     androidxTestCoreVersion = '1.4.0'
