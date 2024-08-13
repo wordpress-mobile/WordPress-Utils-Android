@@ -28,7 +28,6 @@ dependencies {
     lintChecks "org.wordpress:lint:$wordpressLintVersion"
 
     androidTestImplementation "androidx.test:runner:$androidxTestCoreVersion"
-    androidTestImplementation "androidx.test:rules:$androidxTestCoreVersion"
 }
 
 android {
