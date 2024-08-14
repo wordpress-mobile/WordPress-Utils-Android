@@ -205,18 +205,18 @@ public class AppLog {
      * Sends a ERROR log message
      * @param tag Used to identify the source of a log message. It usually identifies the class or activity where the
      *           log call occurs.
-     * @param volleyErrorMsg
+     * @param errorMsg
      * @param statusCode
      */
-    public static void e(T tag, String volleyErrorMsg, int statusCode) {
-        if (TextUtils.isEmpty(volleyErrorMsg)) {
+    public static void e(T tag, String errorMsg, int statusCode) {
+        if (TextUtils.isEmpty(errorMsg)) {
             return;
         }
         String logText;
         if (statusCode == -1) {
-            logText = volleyErrorMsg;
+            logText = errorMsg;
         } else {
-            logText = volleyErrorMsg + ", status " + statusCode;
+            logText = errorMsg + ", status " + statusCode;
         }
         Log.e(TAG + "-" + tag.toString(), logText);
         addEntry(tag, LogLevel.w, logText);

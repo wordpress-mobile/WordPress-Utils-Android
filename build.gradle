@@ -46,14 +46,10 @@ ext {
     commonsTextVersion = '1.10.0'
     eventBusVersion = '3.3.1'
     materialVersion = '1.2.1'
-    volleyVersion = '1.2.0'
 
     // test
     androidxTestCoreVersion = '1.4.0'
     assertjVersion = '3.11.1'
     junitVersion = '4.12'
     robolectricVersion = '4.9'
-
-    // android test
-    jUnitExtVersion = '1.1.3'
 }
