@@ -12,13 +12,12 @@ repositories {
 
 dependencies {
     implementation "org.apache.commons:commons-text:$commonsTextVersion"
-    implementation "com.android.volley:volley:$volleyVersion"
     implementation "com.google.android.material:material:$materialVersion"
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:$androidxSwipeRefreshLayoutVersion"
     implementation "androidx.recyclerview:recyclerview:$androidxRecyclerViewVersion"
-    implementation "org.greenrobot:eventbus:$eventBusVersion"
+    implementation "org.greenrobot:eventbus-java:$eventBusVersion"
 
-    implementation "androidx.core:core-ktx:$androidxCoreVersion"
+    implementation "androidx.core:core:$androidxCoreVersion"
 
     testImplementation "junit:junit:$junitVersion"
     testImplementation "org.assertj:assertj-core:$assertjVersion"
@@ -28,8 +27,6 @@ dependencies {
     lintChecks "org.wordpress:lint:$wordpressLintVersion"
 
     androidTestImplementation "androidx.test:runner:$androidxTestCoreVersion"
-    androidTestImplementation "androidx.test:rules:$androidxTestCoreVersion"
-    androidTestImplementation "androidx.test.ext:junit:$jUnitExtVersion"
 }
 
 android {
