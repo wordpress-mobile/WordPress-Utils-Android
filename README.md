@@ -27,6 +27,7 @@ In the following cases, the CI will publish a new version with the following for
 
 - [WordPress for Android][2]
 - [FluxC][3]
+- [Woo for Android][4]
 
 ## License
 Dual licensed under MIT, and GPL.
@@ -34,3 +35,4 @@ Dual licensed under MIT, and GPL.
 [1]: https://github.com/wordpress-mobile/WordPress-Utils-Android/blob/a9fbe8e6597d44055ec2180dbf45aecbfc332a20/WordPressUtils/build.gradle#L37
 [2]: https://github.com/wordpress-mobile/WordPress-Android
 [3]: https://github.com/wordpress-mobile/WordPress-FluxC-Android
+[4]: https://github.com/woocommerce/woocommerce-android
