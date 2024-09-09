@@ -37,7 +37,7 @@ public class HtmlUtils {
      * @return String without HTML
      */
     public static String fastStripHtml(String str) {
-        if (TextUtils.isEmpty(str)) {
+        if (str == null || str.isEmpty()) {
             return str;
         }
 
