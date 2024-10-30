@@ -130,7 +130,7 @@ public class PhotonUtils {
 
         // use wordpress.com as the host if image is on wordpress.com since it supports the same
         // query params and, more importantly, can handle images in private blogs
-        if (imageUrl.contains("wordpress.com")) {
+        if (imageUrl.contains("wordpress.com") || imageUrl.endsWith(".avif")) {
             return imageUrl + query;
         }
 
