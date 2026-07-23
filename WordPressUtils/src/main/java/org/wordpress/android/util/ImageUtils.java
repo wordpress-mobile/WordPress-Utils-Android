@@ -90,6 +90,14 @@ public class ImageUtils {
         filePath = filePath.replace("file://", "");
 
         if (!filePath.contains("content://")) {
+            // A plain filesystem path pointing at an existing file (e.g. an app cache file) is not
+            // resolvable through the MediaStore content provider — prefixing it with
+            // "content://media" would produce a bogus Uri whose query always fails (throwing on
+            // some devices). EXIF is the only orientation source such a file has, so read it
+            // directly.
+            if (new File(filePath).exists()) {
+                return getExifOrientation(filePath);
+            }
             curStream = Uri.parse("content://media" + filePath);
         } else {
             curStream = Uri.parse(filePath);
