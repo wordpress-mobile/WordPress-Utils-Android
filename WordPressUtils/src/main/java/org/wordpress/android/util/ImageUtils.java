@@ -95,8 +95,9 @@ public class ImageUtils {
             // "content://media" would produce a bogus Uri whose query always fails (throwing on
             // some devices). EXIF is the only orientation source such a file has, so read it
             // directly.
-            if (new File(filePath).exists()) {
-                return getExifOrientation(filePath);
+            String existingPath = firstExistingPath(filePath, Uri.decode(filePath));
+            if (existingPath != null) {
+                return getExifOrientation(existingPath);
             }
             curStream = Uri.parse("content://media" + filePath);
         } else {
@@ -123,6 +124,17 @@ public class ImageUtils {
         return orientation;
     }
 
+    /**
+     * Returns the first candidate that names a file on disk, or null when none of them do.
+     */
+    private static String firstExistingPath(String... candidates) {
+        for (String candidate : candidates) {
+            if (!TextUtils.isEmpty(candidate) && new File(candidate).exists()) {
+                return candidate;
+            }
+        }
+        return null;
+    }
 
     private static int getExifOrientation(String path) {
         if (TextUtils.isEmpty(path)) {
