@@ -90,6 +90,15 @@ public class ImageUtils {
         filePath = filePath.replace("file://", "");
 
         if (!filePath.contains("content://")) {
+            // A plain filesystem path pointing at an existing file (e.g. an app cache file) is not
+            // resolvable through the MediaStore content provider — prefixing it with
+            // "content://media" would produce a bogus Uri whose query always fails (throwing on
+            // some devices). EXIF is the only orientation source such a file has, so read it
+            // directly.
+            String existingPath = firstExistingPath(filePath, Uri.decode(filePath));
+            if (existingPath != null) {
+                return getExifOrientation(existingPath);
+            }
             curStream = Uri.parse("content://media" + filePath);
         } else {
             curStream = Uri.parse(filePath);
@@ -115,6 +124,17 @@ public class ImageUtils {
         return orientation;
     }
 
+    /**
+     * Returns the first candidate that names a file on disk, or null when none of them do.
+     */
+    private static String firstExistingPath(String... candidates) {
+        for (String candidate : candidates) {
+            if (!TextUtils.isEmpty(candidate) && new File(candidate).exists()) {
+                return candidate;
+            }
+        }
+        return null;
+    }
 
     private static int getExifOrientation(String path) {
         if (TextUtils.isEmpty(path)) {
